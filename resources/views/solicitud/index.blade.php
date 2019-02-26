@@ -14,11 +14,16 @@
 		</div>
 	</div>
 
-	@if(count($solicitudes)>0)
+	@include('common.success')
+
+	@include('layouts.filtrarfechas')
+
+	@if(count($solicitudes)>0)	
 		@foreach($solicitudes as $solicitud)
 		<ul class="list-group">
 			<li class="list-group-item"><b>Solicitud: </b> {{ $solicitud->uuid }}</li>
-			<li class="list-group-item"><b>Usuario: </b> {{ $solicitud->user->name }}</li>
+			<li class="list-group-item"><b>Nombre del Solicitante: </b> {{ $solicitud->user->name }}</li>
+			<li class="list-group-item"><b>Cedula del Solicitante: </b> {{ $solicitud->user->cedula }}</li>
 			<li class="list-group-item"><b>Carrera: </b> {{ $solicitud->carrera->nombre }}</li>
 			<li class="list-group-item"><b>Documentos: </b><br>
 				@php
@@ -35,6 +40,9 @@
 			</li>
 			<li class="list-group-item"><b>Total: </b> {{ $total }} Bs.S</li>
 			<li class="list-group-item"><b>Fecha de la Solicitud: </b> {{ $solicitud->created_at->format('d-m-Y') }}</li>
+			@if($solicitud->status=='A')
+				<li class="list-group-item"><b>Fecha de Aprobación: </b> {{ $solicitud->updated_at->format('d-m-Y') }}</li>
+			@endif
 			<li class="list-group-item"><b>Status: </b>
 				@if($solicitud->status=="P")
 				<span class="badge">Pendiente</span>
@@ -45,17 +53,20 @@
 				@if($solicitud->status=="R")
 				<span class="badge badge-info">En Revisión</span>
 				@endif
+				@if($solicitud->status=="E")
+				<span class="badge badge-warning">En Proceso</span>
+				@endif
 				@if($solicitud->status=="A")
-				<span class="badge badge-success">Aprobada</span>
+				<span class="badge badge-success">Culminado</span>
 				@endif
 			</li>
 
-			@if($solicitud->status=='R' || $solicitud->status=='A')
+			@if($solicitud->status!='P' && $solicitud->status!='C')
 			<li class="list-group-item">
 				<b>Comprobante: </b><a href="{{asset('img/')}}/{{$solicitud->pago_img}}" target="_blank">{{ $solicitud->pago_img }}</a>
 			</li>
 			@endif
-			
+
 			@if(Auth::user()->hasRole('estudiante'))
 				@if($solicitud->status=='P' || $solicitud->status=='C')
 				<li class="list-group-item">
@@ -72,7 +83,15 @@
 			@if(Auth::user()->hasRole('directoradm'))
 				@if($solicitud->status=='R')
 				<li class="list-group-item">
-					<a href="#modal-aprobar-solicitud-{{ $solicitud->id }}" data-toggle="modal" class="btn btn-info">Aprobar</a>
+					<a href="#modal-procesar-solicitud-{{ $solicitud->id }}" data-toggle="modal" class="btn btn-primary">Aprobar</a>
+				</li>
+				@endif
+			@endif
+
+			@if(Auth::user()->hasRole('secretario'))
+				@if($solicitud->status=='E')
+				<li class="list-group-item">
+					<a href="#modal-aprobar-solicitud-{{ $solicitud->id }}" data-toggle="modal" class="btn btn-primary">Culminar</a>
 				</li>
 				@endif
 			@endif
@@ -81,6 +100,7 @@
 		@include('solicitud.modal-pago')
 		@include('solicitud.modal-cancelar')
 		@include('solicitud.modal-activar')
+		@include('solicitud.modal-procesar')
 		@include('solicitud.modal-aprobar')
 		@endforeach
 	@else

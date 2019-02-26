@@ -17,8 +17,8 @@ class SecretarioController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['secretario','admin']);
-        $solicitud_programas = SolicitudPrograma::all();
-        $solicitudes = Solicitud::all();
+        $solicitud_programas = SolicitudPrograma::whereIn('status',['E'])->get();
+        $solicitudes = Solicitud::whereIn('status',['E'])->get();
         return view('secretario.index', [ 'solicitud_programas' => $solicitud_programas,'solicitudes'=>$solicitudes]);
     }
 

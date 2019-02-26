@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Solicitud;
 use App\SolicitudPrograma;
+use App\SolicitudServicio;
 use Illuminate\Support\Facades\Auth;
 
 class DirectorAdministrativoController extends Controller
@@ -21,7 +22,8 @@ class DirectorAdministrativoController extends Controller
         $request->user()->authorizeRoles(['directoradm','admin']);
         $solicitudes = Solicitud::whereIn('status',['R'])->get();
         $solicitud_programas = SolicitudPrograma::whereIn('status',['R'])->get();
-        return view('directoradm.index', ['solicitudes'=> $solicitudes, 'solicitud_programas' => $solicitud_programas]);
+        $solicitud_servicios = SolicitudServicio::whereIn('status',['P'])->get();
+        return view('directoradm.index', ['solicitudes'=> $solicitudes, 'solicitud_programas' => $solicitud_programas, 'solicitud_servicios' => $solicitud_servicios]);
     }
 
     /**

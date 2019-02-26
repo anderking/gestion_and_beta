@@ -3,23 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\SolicitudServicio;
-use Illuminate\Support\Facades\Auth;
 
-class DocenteController extends Controller
+class AdministradorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $user_id = Auth::user()->id;
-        $request->user()->authorizeRoles(['docente','admin']);
-        $solicitud_servicios = SolicitudServicio::where('user_id',$user_id)->get();
-        return view('docente.index', [ 'solicitud_servicios' => $solicitud_servicios]);
+        return view('administrador.index');
     }
 
     /**

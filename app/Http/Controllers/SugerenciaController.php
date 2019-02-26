@@ -11,8 +11,19 @@ class SugerenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+        if(count($request->query)>0)
+        {
+            $desde = $request->desde;
+            $hasta = $request->hasta;
+            $sugerencias = Sugerencia::FiltrarFecha($desde,$hasta)->get();
+        }else
+        {
+            $sugerencias = Sugerencia::orderBy('created_at','DESC')->get();
+        }
+
+        return view('sugerencia.index')->with(['sugerencias'=>$sugerencias]);
     }
 
     /**

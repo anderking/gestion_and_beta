@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\SolicitudServicio;
-use Illuminate\Support\Facades\Auth;
+use App\SolicitudPrograma;
 
-class DocenteController extends Controller
+
+class ReporteProgramasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,17 @@ class DocenteController extends Controller
      */
     public function index(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $request->user()->authorizeRoles(['docente','admin']);
-        $solicitud_servicios = SolicitudServicio::where('user_id',$user_id)->get();
-        return view('docente.index', [ 'solicitud_servicios' => $solicitud_servicios]);
+        if(count($request->query)>0)
+        {
+            $desde = $request->desde;
+            $hasta = $request->hasta;
+            $solicitud_programas = SolicitudPrograma::FiltrarFecha($desde,$hasta)->get();
+        }else
+        {
+            $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->get();
+        }
+
+        return view('reporteprograma.index')->with(['solicitud_programas'=>$solicitud_programas]);
     }
 
     /**

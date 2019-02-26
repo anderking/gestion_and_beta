@@ -37,30 +37,17 @@
 
 	<div class="panel panel-container">
 		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="panel panel-teal panel-widget border-right">
 					<br>
 					<div class="row no-padding"><em class="fa fa-xl fa fa-folder-o color-blue"></em>
 						<br>
 						<br>
 						<div class="text-muted">Solicitudes de Documentos</div>
-						<span class="badge">{{ count($solicitudes) }}</span>
+						<a href="{{ route('solicitud.index') }}"><span class="badge">{{ count($solicitudes) }}</span></a>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				<div class="panel panel-blue panel-widget border-right">
-					<br>
-					<div class="row no-padding"><em class="fa fa-xl fa fa-folder-o color-blue"></em>
-						<br>
-						<br>
-						<div class="text-muted">Solicitudes de Programa</div>
-						<span class="badge">{{ count($solicitud_programas) }}</span>
-					</div>
-				</div>
-			</div>
-
 		</div>
 	</div>
 </div>

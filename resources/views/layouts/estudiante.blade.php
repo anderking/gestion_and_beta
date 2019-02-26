@@ -62,61 +62,63 @@
 
 							@if(Auth::user()->hasRole('admin'))
 
-							<div class="acceso_sidebar">Acceso como administrador</div>
 							<li><a href="{{ url('admin') }}"><em class="fa fa-home">&nbsp;</em> Panel de control</a></li>
+							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
+							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
 
 							@elseif(Auth::user()->hasRole('directoradm'))
-							<div class="acceso_sidebar">Acceso como Director Administrativo</div>
+
 							<li><a href="{{ route('directoradm') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
-							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Documentos</a></li>
-							<li><a href="{{ route('programa.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Programas</a></li>
-							<li><a href="{{ route('precioDocumentos.index') }}"><em class="fa fa-user">&nbsp;</em> Precio por Documentos</a></li>
-							<li><a href="{{ route('precioProgramas.index') }}"><em class="fa fa-user">&nbsp;</em> Precio por Pensum</a></li>
-							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comment">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
+							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-file">&nbsp;</em> Ver Solicitud de Documentos</a></li>
+							<li><a href="{{ route('programa.index') }}"><em class="fa fa-file-text">&nbsp;</em> Ver Solicitud de Programas</a></li>
+							<li><a href="{{ route('solicitudservicio.index') }}"><em class="fa fa-info-circle">&nbsp;</em> Ver Solicitud de Servicios</a></li>
+							<li><a href="{{ route('precioDocumentos.index') }}"><em class="fa fa-dollar">&nbsp;</em> Precio por Documentos</a></li>
+							<li><a href="{{ route('precioProgramas.index') }}"><em class="fa fa-dollar">&nbsp;</em> Precio por Pensum</a></li>
+							<li><a href="{{ route('reportedocumentos.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Reporte de Documentos</a></li>
+							<li><a href="{{ route('reporteprogramas.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Reporte de Programas</a></li>
+							<li><a href="{{ route('reporteservicios.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> 
+							Reporte de Servicios</a></li>
+							<li><a href="{{ route('sugerencia.index') }}"><em class="fa fa-comments">&nbsp;</em> Lista de Sugerencias</a></li>
 
 							@elseif(Auth::user()->hasRole('directorpro'))
-							<div class="acceso_sidebar">Acceso como Director de Programa</div>
+
 							<li><a href="{{ route('directorpro') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
-							<li><a href="{{ route('programa.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Programas</a></li>
-							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comment">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
+							<li><a href="{{ route('programa.index') }}"><em class="fa fa-file-text">&nbsp;</em> Ver Solicitud de Programas</a></li>
+							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
 
 							@elseif(Auth::user()->hasRole('estudiante'))
-							<div class="acceso_sidebar">Acceso como Estudiante</div>
+
 							<li><a href="{{ route('estudiante') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
-							<li><a href="{{ route('solicitud.create') }}"><em class="fa fa-shopping-cart">&nbsp;</em> Realizar Solicitud Documentos</a></li>
-							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Documentos</a></li>
-							<li><a href="{{ route('programa.create') }}"><em class="fa fa-plus">&nbsp;</em> Solicitar Programas</a></li>
-							<li><a href="{{ route('programa.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Programas</a></li>
-							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comment">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
+							<li><a href="{{ route('solicitud.create') }}"><em class="fa fa-file">&nbsp;</em> Solicitar Documentos</a></li>
+							<li><a href="{{ route('programa.create') }}"><em class="fa fa-file-text">&nbsp;</em> Solicitar Programas</a></li>
+							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-file">&nbsp;</em> Ver Solicitud de Documentos</a></li>
+							<li><a href="{{ route('programa.index') }}"><em class="fa fa-file-text">&nbsp;</em> Ver Solicitud de Programas</a></li>
+							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
 							
 							
 							@elseif(Auth::user()->hasRole('docente'))
 
-							<div class="acceso_sidebar">Acceso como Docente</div>
 							<li><a href="{{ route('docente') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
-							<li><a href="{{ route('solicitudservicio.create') }}"><em class="fa fa-shopping-cart">&nbsp;</em> Realizar Solicitud Servicio</a></li>
-							<li><a href="{{ route('solicitudservicio.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Servicios</a></li>
-							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comment">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
+							<li><a href="{{ route('solicitudservicio.create') }}"><em class="fa fa-info-circle">&nbsp;</em> Realizar Solicitud Servicio</a></li>
+							<li><a href="{{ route('solicitudservicio.index') }}"><em class="fa fa-info-circle">&nbsp;</em> Ver Solicitud de Servicios</a></li>
+							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
 
-							@else(Auth::user()->hasRole('secretario'))
+							@elseif(Auth::user()->hasRole('secretario'))
 
-							<div class="acceso_sidebar">Acceso como Secretario</div>
 							<li><a href="{{ route('secretario') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
-							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Documentos</a></li>
-							<li><a href="{{ route('programa.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Ver Solicitud de Programas</a></li>
-							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comment">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
+							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-file">&nbsp;</em> Ver Solicitud de Documentos</a></li>
+							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
 
 							@endif
 
 							<li>
-								<a class="fa fa-power-off" href="{{ route('logout') }}"
-								onclick="event.preventDefault();
-								document.getElementById('logout-form').submit();">Logout</a>
+								<a href="{{ route('logout') }}" onclick="event.preventDefault();
+								document.getElementById('logout-form').submit();"><em class="fa fa-sign-out">&nbsp;</em>Logout</a>
 								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 									{{ csrf_field() }}
 								</form>

@@ -1,4 +1,4 @@
-Ya se puede logear con cada usuario y que se redirija a las vistas correspondientes, los menus estan filtrados por cada rol. El directoradm (mailen), el directorpro, el secreatario (registro academico) pueden ver las solicitudes y hasta ahora solo el directoradm las puede aprobar. los otros dos no me acuerdo a que estatus pueden cambiar la solicitud. Tambien coloque las solicitudes de servicios para el docente, creo que asi era que la querian o no se
+Falta la vista del encargado de servicio para que culmine las solicitudes y generar los reportes en pdf y excel
 
 Los usuarios son estos
 

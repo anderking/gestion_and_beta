@@ -24,4 +24,9 @@ class Solicitud extends Model
         return $this->hasMany('App\SolicitudDocumento');
     }
 
+    public function scopeFiltrarFecha($query,$desde,$hasta)
+    {
+        return $query->whereDate('created_at','>=',$desde)->whereDate('created_at','<=',$hasta)->orderBy('created_at','DESC');
+    }
+
 }

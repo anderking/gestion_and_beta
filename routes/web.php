@@ -22,6 +22,14 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+
+Route::group(['prefix' => 'administrador','middleware' => ['auth']], function () {
+	Route::get('/',[
+		'uses'=> 'AdministradorController@index',
+		'as' => 'administrador'
+	]);
+});
+
 Route::group(['prefix' => 'estudiante','middleware' => ['auth']], function () {
 	Route::get('/',[
 		'uses'=> 'EstudianteController@index',
@@ -36,6 +44,9 @@ Route::group(['prefix' => 'directoradm','middleware' => ['auth']], function () {
 	]);
 	Route::resource('precioDocumentos', 'PrecioDocumentoController');
 	Route::resource('precioProgramas', 'PrecioProgramaController');
+	Route::resource('reportedocumentos', 'ReporteDocumentosController');
+	Route::resource('reporteprogramas', 'ReporteProgramasController');
+	Route::resource('reporteservicios', 'ReporteServiciosController');
 });
 
 Route::group(['prefix' => 'directorpro','middleware' => ['auth']], function () {
@@ -50,7 +61,6 @@ Route::group(['prefix' => 'docente','middleware' => ['auth']], function () {
 		'uses'=> 'DocenteController@index',
 		'as' => 'docente'
 	]);
-	Route::resource('solicitudservicio', 'SolicitudServiciosController');
 });
 
 Route::group(['prefix' => 'secretario','middleware' => ['auth']], function () {
@@ -61,8 +71,9 @@ Route::group(['prefix' => 'secretario','middleware' => ['auth']], function () {
 });
 
 Route::resource('user', 'UserController')->middleware('auth');
-Route::resource('programa','SolicitudProgramaController')->middleware('auth');
 Route::resource('solicitud','SolicitudController')->middleware('auth');
+Route::resource('programa','SolicitudProgramaController')->middleware('auth');
+Route::resource('solicitudservicio', 'SolicitudServiciosController');
 Route::resource('sugerencia','SugerenciaController')->middleware('auth');
 
 Route::get('mailable', function (Request $request)

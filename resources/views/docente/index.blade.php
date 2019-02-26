@@ -45,7 +45,7 @@
 					<br>
 					<br>
 					<div class="text-muted">Solicitudes de Servicio</div>
-					<span class="badge">{{ count($solicitud_servicios) }}</span>
+					<a href="{{ route('solicitudservicio.index') }}"><span class="badge">{{ count($solicitud_servicios) }}</span></a>
 				</div>
 			</div>
 

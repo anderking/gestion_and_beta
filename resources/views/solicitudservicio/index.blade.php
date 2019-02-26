@@ -14,54 +14,81 @@
 		</div>
 	</div>
 
+	@include('common.success')
 
-	@if(count($solicitud_servicios)>0)
-	<div class="table-responsive">
-		<table class="table table-hover table-striped">
-			<thead>
-				<tr>
-					<th>Solicitud</th>
-					<th>Usuario</th>
-					<th>Departamento</th>
-					<th>Servicio</th>
-					<th>Items</th>
-					<th>Fecha de la Solicitud</th>
-					<th>Status</th>
-					<th>Acción</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($solicitud_servicios as $solicitud_servicio)
-				<tr>
-					<td>{{ $solicitud_servicio->uuid }}</td>
-					<td>{{ $solicitud_servicio->user->name }}</td>
-					<td>{{ $solicitud_servicio->departamento->nombre }}</td>
-					<td>{{ $solicitud_servicio->servicio->nombre }}</td>
-					<td>{{ count($solicitud_servicio->solicitud_servicio_items) }}</td>
-					<td>{{ $solicitud_servicio->created_at->format('d-m-Y') }}</td>
-					<td>
-						@if($solicitud_servicio->status=="P")
-						<span class="badge">Pendiente</span>
-						@endif
-						@if($solicitud_servicio->status=="C")
-						<span class="badge badge-danger">Cancelada</span>
-						@endif
-						@if($solicitud_servicio->status=="R")
-						<span class="badge badge-info">En Revisión</span>
-						@endif
-						@if($solicitud_servicio->status=="A")
-						<span class="badge badge-success">Aprobada</span>
-						@endif
-					</td>
-					<td><a class="btn btn-primary" href="{{ route('solicitudservicio.show',$solicitud_servicio->id) }}">Ver</a></td>
-				</tr>
+	@include('layouts.filtrarfechas')
+
+	@if(count($solicitud_servicios)>0)	
+		@foreach($solicitud_servicios as $solicitud_servicio)
+		<ul class="list-group">
+			<li class="list-group-item"><b>Solicitud: </b> {{ $solicitud_servicio->id }}</li>
+			<li class="list-group-item"><b>Nombre del Solicitante: </b> {{ $solicitud_servicio->user->name }}</li>
+			<li class="list-group-item"><b>Cedula del Solicitante: </b> {{ $solicitud_servicio->user->cedula }}</li>
+			<li class="list-group-item"><b>Departamento: </b> {{ $solicitud_servicio->departamento->nombre }}</li>
+			<li class="list-group-item"><b>Servicio: </b> {{ $solicitud_servicio->servicio->nombre }}</li>
+			<li class="list-group-item"><b>Tipo de Servicio: </b> {{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</li>
+			<li class="list-group-item"><b>Observaciones: </b> {{ $solicitud_servicio->observaciones }}</li>
+			<li class="list-group-item"><b>Documentos: </b><br>
+				@foreach($solicitud_servicio->solicitud_servicio_items as $solicitud_servicio_item)
+				{{ $solicitud_servicio_item->item->nombre }}<br>
 				@endforeach
-			</tbody>
-		</table>
-	</div>
+			</li>
+			<li class="list-group-item"><b>Fecha de la Solicitud: </b> {{ $solicitud_servicio->created_at->format('d-m-Y') }}</li>
+			@if($solicitud_servicio->status=='A')
+				<li class="list-group-item"><b>Fecha de Aprobación: </b> {{ $solicitud_servicio->updated_at->format('d-m-Y') }}</li>
+			@endif
+			<li class="list-group-item"><b>Status: </b>
+				@if($solicitud_servicio->status=="P")
+				<span class="badge">Pendiente</span>
+				@endif
+				@if($solicitud_servicio->status=="C")
+				<span class="badge badge-success">Cancelado</span>
+				@endif
+				@if($solicitud_servicio->status=="E")
+				<span class="badge badge-warning">En Proceso</span>
+				@endif
+				@if($solicitud_servicio->status=="A")
+				<span class="badge badge-success">Culminado</span>
+				@endif
+			</li>
+
+			@if(Auth::user()->hasRole('docente'))
+				@if($solicitud_servicio->status=='P' || $solicitud_servicio->status=='C')
+				<li class="list-group-item">
+					@if($solicitud_servicio->status=='P')
+					<a href="#modal-cancelar-solicitud_servicio-{{ $solicitud_servicio->id }}" data-toggle="modal" class="btn btn-danger">Cancelar</a>
+					@elseif($solicitud_servicio->status=='C')
+					<a href="#modal-activar-solicitud_servicio-{{ $solicitud_servicio->id }}" data-toggle="modal" class="btn btn-warning">Activar</a>
+					@endif
+				</li>
+				@endif
+			@endif
+			
+			@if(Auth::user()->hasRole('directoradm'))
+				@if($solicitud_servicio->status=='P')
+				<li class="list-group-item">
+					<a href="#modal-procesar-solicitud_servicio-{{ $solicitud_servicio->id }}" data-toggle="modal" class="btn btn-primary">Aprobar</a>
+				</li>
+				@endif
+			@endif
+
+			@if(Auth::user()->hasRole('encargadoserv'))
+				@if($solicitud_servicio->status=='E')
+				<li class="list-group-item">
+					<a href="#modal-aprobar-solicitud_servicio-{{ $solicitud_servicio->id }}" data-toggle="modal" class="btn btn-primary">Culminar</a>
+				</li>
+				@endif
+			@endif
+
+		</ul>
+		@include('solicitudservicio.modal-cancelar')
+		@include('solicitudservicio.modal-activar')
+		@include('solicitudservicio.modal-procesar')
+		@include('solicitudservicio.modal-aprobar')
+		@endforeach
 	@else
 		<div class="jumbotron">
-			<h1 class="text-center">No hay registros</h1>
+			<h2 class="text-center">No hay solicitudes pendientes</h2>
 		</div>
 	@endif
 

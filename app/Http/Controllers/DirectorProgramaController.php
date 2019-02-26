@@ -16,7 +16,7 @@ class DirectorProgramaController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['directorpro','admin']);
-        $solicitud_programas = SolicitudPrograma::whereIn('status',['A'])->get();
+        $solicitud_programas = SolicitudPrograma::whereIn('status',['E'])->get();
         return view('directorpro.index', [ 'solicitud_programas' => $solicitud_programas]);
     }
 

@@ -23,22 +23,47 @@ class SolicitudController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = Auth::user()->id;
+        
         if(Auth::user()->hasRole('directoradm'))
         {
-            $solicitudes = Solicitud::orderBy('updated_at','DESC')->whereIn('status',['R'])->get();
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->whereIn('status',['R'])->get();
+            }else
+            {
+                $solicitudes = Solicitud::orderBy('created_at','DESC')->whereIn('status',['R'])->get();
+            }
         }
 
         if(Auth::user()->hasRole('secretario'))
         {
-            $solicitudes = Solicitud::orderBy('updated_at','DESC')->get();
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->whereIn('status',['E'])->get();
+            }else
+            {
+                $solicitudes = Solicitud::orderBy('created_at','DESC')->whereIn('status',['E'])->get();
+            }
         }
 
         if(Auth::user()->hasRole('estudiante'))
         {
-            $solicitudes = Solicitud::orderBy('created_at','DESC')->where('user_id',$user_id)->get();
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->where('user_id',$user_id)->get();
+            }else
+            {
+                $solicitudes = Solicitud::orderBy('created_at','DESC')->where('user_id',$user_id)->get();
+            }
         }
 
         $solicitudes->each(function($solicitudes){
@@ -141,7 +166,7 @@ class SolicitudController extends Controller
         {
             $solicitud->status = $request['status'];
             $solicitud->update();
-            return redirect()->route('solicitud.index');
+            return redirect()->route('solicitud.index')->with('status','Solicitud Actualizada');
         }
 
         if ($request->file('pago_img'))

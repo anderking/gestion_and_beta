@@ -20,28 +20,47 @@ class SolicitudProgramaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = Auth::user()->id;
-        
+
         if(Auth::user()->hasRole('directoradm'))
         {
-            $solicitud_programa = SolicitudPrograma::orderBy('updated_at','DESC')->whereIn('status',['R'])->get();
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitud_programa = SolicitudPrograma::FiltrarFecha($desde,$hasta)->whereIn('status',['R'])->get();
+            }else
+            {
+                $solicitud_programa = SolicitudPrograma::orderBy('created_at','DESC')->whereIn('status',['R'])->get();
+            }
         }
 
         if(Auth::user()->hasRole('directorpro'))
         {
-            $solicitud_programa = SolicitudPrograma::orderBy('updated_at','DESC')->whereIn('status',['A'])->get();
-        }
-
-        if(Auth::user()->hasRole('secretario'))
-        {
-            $solicitud_programa = SolicitudPrograma::orderBy('updated_at','DESC')->get();
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitud_programa = SolicitudPrograma::FiltrarFecha($desde,$hasta)->whereIn('status',['E'])->get();
+            }else
+            {
+                $solicitud_programa = SolicitudPrograma::orderBy('created_at','DESC')->whereIn('status',['E'])->get();
+            }
         }
 
         if(Auth::user()->hasRole('estudiante'))
         {
-            $solicitud_programa = SolicitudPrograma::orderBy('created_at','DESC')->where('user_id',$user_id)->get();
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitud_programa = SolicitudPrograma::FiltrarFecha($desde,$hasta)->where('user_id',$user_id)->get();
+            }else
+            {
+                $solicitud_programa = SolicitudPrograma::orderBy('created_at','DESC')->where('user_id',$user_id)->get();
+            }
         }
 
         $solicitud_programa->each(function($solicitud_programa){
@@ -138,7 +157,7 @@ class SolicitudProgramaController extends Controller
         {
             $solicitud_programa->status = $request['status'];
             $solicitud_programa->update();
-            return redirect()->route('programa.index');
+            return redirect()->route('programa.index')->with('status','Solicitud Actualizada');
         }
 
         if ($request->file('pago_img'))

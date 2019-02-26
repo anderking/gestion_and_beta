@@ -44,7 +44,7 @@
 						<br>
 						<br>
 						<div class="text-muted">Solicitudes de Documentos</div>
-						<span class="badge">{{ count($solicitudes) }}</span>
+						<a href="{{ route('solicitud.index') }}"><span class="badge">{{ count($solicitudes) }}</span></a>
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 						<br>
 						<br>
 						<div class="text-muted">Solicitudes de Programa</div>
-						<span class="badge">{{ count($solicitud_programas) }}</span>
+						<a href="{{ route('programa.index') }}"><span class="badge">{{ count($solicitud_programas) }}</span></a>
 					</div>
 				</div>
 			</div>

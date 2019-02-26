@@ -10,4 +10,9 @@ class Sugerencia extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function scopeFiltrarFecha($query,$desde,$hasta)
+    {
+        return $query->whereDate('created_at','>=',$desde)->whereDate('created_at','<=',$hasta)->orderBy('created_at','DESC');
+    }
 }

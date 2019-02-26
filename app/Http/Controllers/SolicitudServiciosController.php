@@ -22,9 +22,35 @@ class SolicitudServiciosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->get();
+        $user_id = Auth::user()->id;
+
+        if(Auth::user()->hasRole('directoradm'))
+        {
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitud_servicios = SolicitudServicio::FiltrarFecha($desde,$hasta)->whereIn('status',['P'])->get();
+            }else
+            {
+                $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->whereIn('status',['P'])->get();
+            }
+        }
+
+        if(Auth::user()->hasRole('docente'))
+        {
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $solicitud_servicios = SolicitudServicio::FiltrarFecha($desde,$hasta)->where('user_id',$user_id)->get();
+            }else
+            {
+                $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->where('user_id',$user_id)->get();
+            }
+        }
 
         $solicitud_servicios->each(function($solicitud_servicios){
             $solicitud_servicios->user;
@@ -32,6 +58,7 @@ class SolicitudServiciosController extends Controller
             $solicitud_servicios->servicio;
             $solicitud_servicios->solicitud_servicio_items;
         });
+
 
         return view('solicitudservicio.index')->with('solicitud_servicios', $solicitud_servicios);
     }
@@ -136,7 +163,7 @@ class SolicitudServiciosController extends Controller
         {
             $solicitud_servicio->status = $request['status'];
             $solicitud_servicio->update();
-            return redirect()->route('solicitudservicio.show',$id)->with('status','Se ha actualizado el usuario');
+            return redirect()->route('solicitudservicio.index')->with('status','Se ha actualizado el usuario');
         }
     }
 
