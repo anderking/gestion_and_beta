@@ -7,7 +7,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Http\Request;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\User;
 use App\Solicitud;
 
 class EmailSolicitud extends Mailable
@@ -20,21 +19,15 @@ class EmailSolicitud extends Mailable
      * @return void
      */
 
+    public $solicitud;
     public $documentos;
-    public $user;
-    public $solicitudes;
-    public $uuid;
 
-    public function __construct(Request $request)
+    public function __construct($id)
     {
-        // Recupera los documentos y el id del usuario
-        $this->documentos = $request;
-        $this->user = $request->user;
-        // Obtiene todas las solicitudes del usuario
-        $this->solicitudes = Solicitud::all()->where("users_id",$this->user);
-        // obtiene la ultima solicitud del usuario
-        $this->uuid = $this->solicitudes->last();
-       
+        $solicitud = Solicitud::findOrFail($id);
+        $solicitud->solicitudes_documentos;
+        $this->documentos = $solicitud->solicitudes_documentos;
+        $this->solicitud = $solicitud;
     }
 
     /**
@@ -44,7 +37,8 @@ class EmailSolicitud extends Mailable
      */
     public function build()
     {
-        return $this->from('gestionaducla@gmail.com')
+        return $this->from('anderson.inversiones.2017@gmail.com','UCLA')
+                    ->to('anderson.inversiones.2017@gmail.com')->subject('Solicitud de documentos UCLA')
                     ->markdown('solicitud.email.email');
     }
 }

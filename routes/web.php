@@ -79,8 +79,17 @@ Route::resource('programa','SolicitudProgramaController')->middleware('auth');
 Route::resource('solicitudservicio', 'SolicitudServiciosController');
 Route::resource('sugerencia','SugerenciaController')->middleware('auth');
 
-Route::get('mailable', function (Request $request)
-{
-    return new App\Mail\EmailSolicitud($request);
+Route::get('sendmail', function (Request $request){
+	$request = [
+		"name" => "dasd",
+	];
+
+	Mail::send('solicitud.email.email',$request,function($message){
+		$message->from('anderson.inversiones.2017@gmail.com','UCLA');
+		$message->to('anderson.inversiones.2017@gmail.com')->subject('Solicitud de documentos UCLA');
+	});
+
+	return "Email Enviado";
+    
 });
 

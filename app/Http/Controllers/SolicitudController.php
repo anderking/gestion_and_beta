@@ -110,7 +110,8 @@ class SolicitudController extends Controller
         $documentos = $request->get('documentos', []);
         $precio_fact = DB::table('precio_documentos')->select('precio')->where('carrera_id', $solicitud->carrera_id)->whereIn('documento_id', $documentos)->get();
 
-        $last_solicitud = Solicitud::select('id')->orderby('created_at','DESC')->first();
+        $last_solicitud = Solicitud::orderby('created_at','DESC')->first();
+
 
         for($i=0; $i<count($documentos); $i++)
         {
@@ -122,7 +123,7 @@ class SolicitudController extends Controller
         }
         
 
-        //Mail::to($request->email)->send(new EmailSolicitud($request));
+        Mail::to($request->email)->send(new EmailSolicitud($last_solicitud->id));
         return redirect()->route('solicitud.create')->with('status','Se ha enviado la solicitud');
 
     }

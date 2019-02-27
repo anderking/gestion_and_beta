@@ -1,61 +1,35 @@
-@component('mail::message')
-# Solicitud de documentos UCLA
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	body{
+		background: none;
+	}
+</style>
+<body>
+	<ul class="list-group">
+		<li class="list-group-item"><b>Solicitud: </b> {{ $solicitud->uuid }}</li>
+		<li class="list-group-item"><b>Nombre del Solicitante: </b> {{ $solicitud->user->name }}</li>
+		<li class="list-group-item"><b>Cedula del Solicitante: </b> {{ $solicitud->user->cedula }}</li>
+		<li class="list-group-item"><b>Carrera: </b> {{ $solicitud->carrera->nombre }}</li>
+		<li class="list-group-item"><b>Documentos: </b><br>
+			@php
+			 	$total=0;
+			 @endphp
+			@foreach($documentos as $documento)
+			
+			@php
+    			$total = $total+$documento->precio_fact;
+			@endphp
 
-Código de la solicitud:
-{{ $uuid->uuid }}
-
-Usted ha solicitado los siguientes documentos:
-
-
-<!-- @component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
-!-->
-
-<div >
-<ul class="list-group">
-
-<!-- Por ahora un if para cada documento, si viene en el request (si es seleccionado por el usuario)
-    se mostrará-->
-@if($documentos['1'])
-
-<li class="list-group-item">
-<H3>{{substr($documentos['1'], 0 , strrpos($documentos['1'], "-"))}}</H3> <H4> costo: </H4> <span>{{substr(strrchr($documentos['1'], "-"), 1)}}</span>
-</li>
-@endif
-@if($documentos['2'])
-<li class="list-group-item">
-<H3>{{substr($documentos['2'], 0 , strrpos($documentos['2'], "-"))}}</H3> <H4> costo: </H4><span>{{substr(strrchr($documentos['2'], "-"), 1)}}</span>
-</li>
-@endif
-@if($documentos['3'])
-<li class="list-group-item">
-<H3>{{substr($documentos['3'], 0 , strrpos($documentos['3'], "-"))}}</H3> <H4> costo: </H4><span>{{substr(strrchr($documentos['3'], "-"), 1)}}</span>
-</li>
-@endif
-@if($documentos['4'])
-<li class="list-group-item">
-<<H3>{{substr($documentos['4'], 0 , strrpos($documentos['4'], "-"))}}</H3> <H4> costo: </H4> <span>{{substr(strrchr($documentos['4'], "-"), 1)}}</span>
-</li>
-@endif
-@if($documentos['5'])
-<li class="list-group-item">
-<H3>{{substr($documentos['5'], 0 , strrpos($documentos['5'], "-"))}}</H3><H4> costo: </H4> <span>{{substr(strrchr($documentos['5'], "-"), 1)}}</span>
-</li>
-@endif
-@if($documentos['6'])
-<li class="list-group-item">
-<H3>{{substr($documentos['6'], 0 , strrpos($documentos['6'], "-"))}}</H3> <H4> costo: </H4> <span>{{substr(strrchr($documentos['6'], "-"), 1)}}</span>
-</li>
-@endif
-@if($documentos['7'])
-<li class="list-group-item">
-<H3>{{substr($documentos['7'], 0 , strrpos($documentos['7'], "-"))}}</H3> <H4> costo: </H4> <span>{{substr(strrchr($documentos['7'], "-"), 1)}}</span>
-@endif
-
-</ul>
-</div>
-
-Gracias por usar nuestro servicio,<br>
-{{ config('app.name') }}
-@endcomponent
+			<b>{{ $documento->precio_fact }}</b> Bs.S {{ $documento->documento->nombre }}<br>
+			@endforeach
+		</li>
+		<li class="list-group-item"><b>Total: </b> {{ $total }} Bs.S</li>
+		<li class="list-group-item"><b>Fecha de la Solicitud: </b> {{ $solicitud->created_at->format('d-m-Y') }}</li>
+	</ul>
+</body>
+</html>
