@@ -9,6 +9,18 @@
 	</ol>
 	
 	@include('layouts.filtrarfechas')
+	
+	<div class="row">
+		<div class="col-xs-12">
+			{!! Form::open(array('route' => 'reporteserviciospdf','method' => 'GET')) !!}
+			<input type="hidden" id="desdepdf" name="desdepdf" value="{{ $request->desde }}">
+			<input type="hidden" id="hastapdf" name="hastapdf" value="{{ $request->hasta }}">
+			<input type="hidden" id="statuspdf" name="statuspdf" value="{{ $request->status }}">
+			<input type="submit" value="Generar PDF" class="btn btn-primary">
+			{!! Form::close() !!}
+		</div>
+	</div>
+	<br>
 
 	@if(count($solicitud_servicios)>0)
 	<div class="table-responsive">

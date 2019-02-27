@@ -29,4 +29,9 @@ class Solicitud extends Model
         return $query->whereDate('created_at','>=',$desde)->whereDate('created_at','<=',$hasta)->orderBy('created_at','DESC');
     }
 
+    public function scopeFiltrarFechaStatus($query,$desde,$hasta,$status)
+    {
+        return $query->whereDate('created_at','>=',$desde)->whereDate('created_at','<=',$hasta)->whereIn('status',[$status])->orderBy('created_at','DESC');
+    }
+
 }

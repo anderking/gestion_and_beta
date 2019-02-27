@@ -77,21 +77,40 @@
 @endif
 
 	<div class="row">
-		<div class="col-xs-12 col-sm-4 col-md-1 col-lg-1">
+		<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
 			{!! Form::label('desde', 'Desde:',['class'=>'control-label']) !!}
 		</div>
 		<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
-			{!! Form::date('desde', date('Y-m-d'), ['class'=>'form-control','required']) !!}
+			{!! Form::date('desde', date('Y-m-d'), ['id'=>'desde','class'=>'form-control','required']) !!}
 		</div>
-		<div class="col-xs-12 col-sm-4 col-md-1 col-lg-1">
+		<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
 			{!! Form::label('hasta', 'Hasta:',['class'=>'control-label']) !!}
 		</div>
 		<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
-			{!! Form::date('hasta', date('Y-m-d'), ['class'=>'form-control','required']) !!}
+			{!! Form::date('hasta', date('Y-m-d'), ['id'=>'hasta','class'=>'form-control','required']) !!}
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-			<input type="submit" class="btn btn-primary btn-lg" value="Filtrar">
+
+		@if(Route::getCurrentRoute()->getName()=="reportedocumentos.index" || Route::getCurrentRoute()->getName()=="reporteprogramas.index" || Route::getCurrentRoute()->getName()=="reporteservicios.index")
+		<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
+			{!! Form::label('statys', 'Status:',['class'=>'control-label']) !!}
 		</div>
+		<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+			<select class="form-control" name="status">
+				<option value="">Seleccione un Status</option>
+				<option value="P">Pendiente</option>
+				<option value="C">Cancelado</option>
+				<option value="R">En Revisión</option>
+				<option value="E">En Proceso</option>
+				<option value="A">Culminado</option>
+			</select>
+		</div>
+		@endif
+
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+		<br class="visible-xs">
+			<input type="submit" class="btn btn-primary" value="Filtrar">
+		</div>
+
 	</div>
 	<br>
 

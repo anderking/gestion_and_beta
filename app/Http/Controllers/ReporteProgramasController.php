@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SolicitudPrograma;
-
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ReporteProgramasController extends Controller
 {
@@ -19,13 +19,48 @@ class ReporteProgramasController extends Controller
         {
             $desde = $request->desde;
             $hasta = $request->hasta;
-            $solicitud_programas = SolicitudPrograma::FiltrarFecha($desde,$hasta)->get();
+            $status = $request->status;
+            if($status==null)
+            {
+                $solicitud_programas = SolicitudPrograma::FiltrarFecha($desde,$hasta)->get();
+            }else{
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaStatus($desde,$hasta,$status)->get();
+            }
+            return view('reporteprograma.index')->with(['solicitud_programas'=>$solicitud_programas,'request'=>$request]);
+        }else
+        {
+            $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->get();
+            return view('reporteprograma.index')->with(['solicitud_programas'=>$solicitud_programas,'request'=>$request]);
+        }
+    }
+
+
+    public function pdf(Request $request)
+    {
+        $desdepdf = $request->desdepdf;
+        $hastapdf = $request->hastapdf;
+
+        if($desdepdf!=null && $hastapdf!=null)
+        {
+            $desdepdf = $request->desdepdf;
+            $hastapdf = $request->hastapdf;
+            $statuspdf = $request->statuspdf;
+            if($statuspdf==null)
+            {
+                $solicitud_programas = SolicitudPrograma::FiltrarFecha($desdepdf,$hastapdf)->get();
+            }else{
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaStatus($desdepdf,$hastapdf,$statuspdf)->get();
+            }
         }else
         {
             $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->get();
         }
-
-        return view('reporteprograma.index')->with(['solicitud_programas'=>$solicitud_programas]);
+        
+        $pdf = PDF::loadView('reporteprograma.pdf', compact('solicitud_programas'));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('reporteprograma.pdf');
+        //return view('reporteprograma.pdf')->with(['solicitud'=>$solicitud]);
+        
     }
 
     /**

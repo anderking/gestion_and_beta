@@ -45,8 +45,11 @@ Route::group(['prefix' => 'directoradm','middleware' => ['auth']], function () {
 	Route::resource('precioDocumentos', 'PrecioDocumentoController');
 	Route::resource('precioProgramas', 'PrecioProgramaController');
 	Route::resource('reportedocumentos', 'ReporteDocumentosController');
+	Route::get('reportedocumentospdf', 'ReporteDocumentosController@pdf')->name('reportedocumentospdf');
 	Route::resource('reporteprogramas', 'ReporteProgramasController');
+	Route::get('reporteprogramaspdf', 'ReporteProgramasController@pdf')->name('reporteprogramaspdf');
 	Route::resource('reporteservicios', 'ReporteServiciosController');
+	Route::get('reporteserviciospdf', 'ReporteServiciosController@pdf')->name('reporteserviciospdf');
 });
 
 Route::group(['prefix' => 'directorpro','middleware' => ['auth']], function () {

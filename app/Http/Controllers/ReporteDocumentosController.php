@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Solicitud;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ReporteDocumentosController extends Controller
 {
@@ -18,13 +19,48 @@ class ReporteDocumentosController extends Controller
         {
             $desde = $request->desde;
             $hasta = $request->hasta;
-            $solicitud = Solicitud::FiltrarFecha($desde,$hasta)->get();
+            $status = $request->status;
+            if($status==null)
+            {
+                $solicitud = Solicitud::FiltrarFecha($desde,$hasta)->get();
+            }else{
+                $solicitud = Solicitud::FiltrarFechaStatus($desde,$hasta,$status)->get();
+            }
+            return view('reportedocumento.index')->with(['solicitud'=>$solicitud,'request'=>$request]);
+        }else
+        {
+            $solicitud = Solicitud::orderBy('created_at','DESC')->get();
+            return view('reportedocumento.index')->with(['solicitud'=>$solicitud,'request'=>$request]);
+        }
+
+    }
+
+    public function pdf(Request $request)
+    {
+        $desdepdf = $request->desdepdf;
+        $hastapdf = $request->hastapdf;
+
+        if($desdepdf!=null && $hastapdf!=null)
+        {
+            $desdepdf = $request->desdepdf;
+            $hastapdf = $request->hastapdf;
+            $statuspdf = $request->statuspdf;
+            if($statuspdf==null)
+            {
+                $solicitud = Solicitud::FiltrarFecha($desdepdf,$hastapdf)->get();
+            }else{
+                $solicitud = Solicitud::FiltrarFechaStatus($desdepdf,$hastapdf,$statuspdf)->get();
+            }
         }else
         {
             $solicitud = Solicitud::orderBy('created_at','DESC')->get();
         }
-
-        return view('reportedocumento.index')->with(['solicitud'=>$solicitud]);
+        
+        $pdf = PDF::loadView('reportedocumento.pdf', compact('solicitud'));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('reportedocumento.pdf');
+        //return view('reportedocumento.pdf')->with(['solicitud'=>$solicitud]);
+        
     }
 
     /**

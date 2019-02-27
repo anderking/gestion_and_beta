@@ -36,6 +36,4 @@ php artisan serve<br>
 
 php artisan voyager:admin "admin@admin.com" --create YA NO ES NECESARIO
 
-Y deberia correr con eso, por si acaso no les agarra el clone, descarguen el zip, o descargenlo directamente de mega
-
-https://mega.nz/#!tlpE3IYZ!H_6v7t2Z_-Zi7cuwjKkfuxD9TbSQoUPik15rAqIhz68
+Y deberia correr con eso, por si acaso no les agarra el clone, descarguen el zip.

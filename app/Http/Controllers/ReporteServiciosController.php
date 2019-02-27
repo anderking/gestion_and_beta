@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SolicitudServicio;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ReporteServiciosController extends Controller
 {
@@ -18,13 +19,48 @@ class ReporteServiciosController extends Controller
         {
             $desde = $request->desde;
             $hasta = $request->hasta;
-            $solicitud_servicios = SolicitudServicio::FiltrarFecha($desde,$hasta)->get();
+            $status = $request->status;
+            if($status==null)
+            {
+                $solicitud_servicios = SolicitudServicio::FiltrarFecha($desde,$hasta)->get();
+            }else{
+                $solicitud_servicios = SolicitudServicio::FiltrarFechaStatus($desde,$hasta,$status)->get();
+            }
+            return view('reporteservicio.index')->with(['solicitud_servicios'=>$solicitud_servicios,'request'=>$request]);
+        }else
+        {
+            $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->get();
+            return view('reporteservicio.index')->with(['solicitud_servicios'=>$solicitud_servicios,'request'=>$request]);
+        }
+    }
+
+
+    public function pdf(Request $request)
+    {
+        $desdepdf = $request->desdepdf;
+        $hastapdf = $request->hastapdf;
+
+        if($desdepdf!=null && $hastapdf!=null)
+        {
+            $desdepdf = $request->desdepdf;
+            $hastapdf = $request->hastapdf;
+            $statuspdf = $request->statuspdf;
+            if($statuspdf==null)
+            {
+                $solicitud_servicios = SolicitudServicio::FiltrarFecha($desdepdf,$hastapdf)->get();
+            }else{
+                $solicitud_servicios = SolicitudServicio::FiltrarFechaStatus($desdepdf,$hastapdf,$statuspdf)->get();
+            }
         }else
         {
             $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->get();
         }
-
-        return view('reporteservicio.index')->with(['solicitud_servicios'=>$solicitud_servicios]);
+        
+        $pdf = PDF::loadView('reporteservicio.pdf', compact('solicitud_servicios'));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('reporteservicio.pdf');
+        //return view('reporteservicio.pdf')->with(['solicitud'=>$solicitud]);
+        
     }
 
     /**

@@ -137,9 +137,9 @@
 		<p class="back-link">Gestion AD <a href="https://www.medialoot.com">UCLA.EDU.VE</a></p>
 	</footer>
 
-	@yield('scripts')
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	@yield('scripts')
 	
 </body>
 </html>

@@ -41,7 +41,7 @@
 			<div class="col-xs-12">
 				<div class="panel panel-teal panel-widget border-right">
 					<br>
-					<em class="fa fa-xl fa fa-folder-o color-blue"></em>
+					<em class="fa fa-xl fa fa-info-circle"></em>
 					<br>
 					<br>
 					<div class="text-muted">Solicitudes de Servicio</div>

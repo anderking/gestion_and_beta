@@ -1,31 +1,67 @@
-@extends('layouts.estudiante')
-
-@section('content')
-<div class="col-sm-offset-5 col-sm-7 col-md-offset-4 col-md-8 col-lg-offset-3 col-lg-9 main main_solicitud_create">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Documento</title>
 	
-	<ol class="breadcrumb">
-		<li><a href="#"><em class="fa fa-home"></em></a></li>
-		<li class="active">Home</li>
-	</ol>
-	
-	@include('layouts.filtrarfechas')
+	<style type="text/css">
+		body{
+			margin: 0;
+			font-size: 9px;
+		}
+		.table {
+			width: 100%;
+			margin-bottom: 1rem;
+			background-color: transparent;
+		}
+		table {
+			border-collapse: collapse;
+		}
+		.table .thead-dark th {
+		    color: #fff;
+		    background-color: #212529;
+		    border-color: #32383e;
+		}
 
-	<div class="row">
-		<div class="col-xs-12">
-			{!! Form::open(array('route' => 'reportedocumentospdf','method' => 'GET')) !!}
-			<input type="hidden" id="desdepdf" name="desdepdf" value="{{ $request->desde }}">
-			<input type="hidden" id="hastapdf" name="hastapdf" value="{{ $request->hasta }}">
-			<input type="hidden" id="statuspdf" name="statuspdf" value="{{ $request->status }}">
-			<input type="submit" value="Generar PDF" class="btn btn-primary">
-			{!! Form::close() !!}
-		</div>
-	</div>
-	<br>
+		.table thead th {
+		    vertical-align: bottom;
+		    border-bottom: 2px solid #dee2e6;
+		}
+		.table-sm td, .table-sm th {
+		    padding: .3rem;
+		}
+		.table td, .table th {
+		    padding: .75rem;
+		    vertical-align: top;
+		    border-top: 1px solid #dee2e6;
+		}
+		th {
+		    text-align: inherit;
+		}
+
+		.table-sm td, .table-sm th {
+		    padding: .3rem;
+		}
+
+		.table td, .table th {
+		    padding: .75rem;
+		    vertical-align: top;
+		    border-top: 1px solid #dee2e6;
+		}
+
+		/*@page {
+		  margin: 0px;
+		}*/
+
+	</style>
+
+
+</head>
+<body>
 
 	@if(count($solicitud)>0)
-	<div class="table-responsive">
-		<table class="table table-hover table-condensed">
-			<thead>
+		<table class="table table-sm">
+			<thead class="thead-dark">
 				<tr>
 					<th>Código</th>
 					<th>Nombre del Solicitante</th>
@@ -63,19 +99,19 @@
 					<td>{{ $solicitud->updated_at->format('Y-m-d') }}</td>
 					<td>
 						@if($solicitud->status=="P")
-						<span class="badge">Pendiente</span>
+						Pendiente
 						@endif
 						@if($solicitud->status=="C")
-						<span class="badge badge-danger">Cancelada</span>
+						Cancelada
 						@endif
 						@if($solicitud->status=="R")
-						<span class="badge badge-info">En Revisión</span>
+						En Revisión
 						@endif
 						@if($solicitud->status=="E")
-						<span class="badge badge-warning">En Proceso</span>
+						En Proceso
 						@endif
 						@if($solicitud->status=="A")
-						<span class="badge badge-success">Culminado</span>
+						Culminado
 						@endif
 					</td>
 					
@@ -83,13 +119,6 @@
 				@endforeach
 			</tbody>
 		</table>
-	</div>
-	@else
-		<div class="jumbotron">
-			<h1 class="text-center">No hay registros</h1>
-		</div>
 	@endif
-	
-</div>
-
-@endsection
+</body>
+</html>

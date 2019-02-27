@@ -40,7 +40,7 @@
 			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 				<div class="panel panel-teal panel-widget border-right">
 					<br>
-					<div class="row no-padding"><em class="fa fa-xl fa fa-folder-o color-blue"></em>
+					<div class="row no-padding"><em class="fa fa-xl fa fa-file"></em>
 						<br>
 						<br>
 						<div class="text-muted">Solicitudes de Documentos</div>
@@ -52,7 +52,7 @@
 			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 				<div class="panel panel-blue panel-widget border-right">
 					<br>
-					<div class="row no-padding"><em class="fa fa-xl fa fa-folder-o color-blue"></em>
+					<div class="row no-padding"><em class="fa fa-xl fa fa-file-text"></em>
 						<br>
 						<br>
 						<div class="text-muted">Solicitudes de Programa</div>
@@ -64,7 +64,7 @@
 			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 				<div class="panel panel-blue panel-widget border-right">
 					<br>
-					<div class="row no-padding"><em class="fa fa-xl fa fa-folder-o color-blue"></em>
+					<div class="row no-padding"><em class="fa fa-xl fa fa-info-circle"></em>
 						<br>
 						<br>
 						<div class="text-muted">Solicitudes de Servicio</div>
