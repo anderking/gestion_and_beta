@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Solicitud extends Model
 {
 	protected $table = 'solicitudes';
-	protected $fillable = ['uuid','user_id','carrera_id','status','pago_img'];
+	protected $fillable = ['uuid','user_id','carrera_id','email','status','pago_img'];
 
     public function user()
     {

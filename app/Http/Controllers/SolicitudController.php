@@ -102,6 +102,7 @@ class SolicitudController extends Controller
         $solicitud->user_id = $request['user_id'];
         $solicitud->carrera_id = $request['carrera_id'];
         $solicitud->uuid= Uuid::generate()->string;
+        //$solicitud->email = $request['email'];
         $solicitud->status = $request['status'];
         $solicitud->pago_img = "";
 
@@ -121,9 +122,9 @@ class SolicitudController extends Controller
             $solicitud_documentos->precio_fact = $precio_fact[$i]->precio;
             $solicitud_documentos->save();
         }
-        
 
         Mail::to($request->email)->send(new EmailSolicitud($last_solicitud->id));
+        //return view('solicitud.email.email')->with(['last_solicitud'=>$last_solicitud]);
         return redirect()->route('solicitud.create')->with('status','Se ha enviado la solicitud');
 
     }
@@ -167,6 +168,12 @@ class SolicitudController extends Controller
         {
             $solicitud->status = $request['status'];
             $solicitud->update();
+            
+            if($solicitud->status=="E" || $solicitud->status=="A")
+            {
+                Mail::to('laurarincon2525@gmail.com')->send(new EmailSolicitud($id));
+            }
+
             return redirect()->route('solicitud.index')->with('status','Solicitud Actualizada');
         }
 
@@ -180,7 +187,7 @@ class SolicitudController extends Controller
             $solicitud->pago_img = $name;
             $solicitud->status = 'R';
             $solicitud->update();
-            return redirect()->route('solicitud.index');
+            return redirect()->route('solicitud.index')->with('status','Solicitud Actualizada');
         }
     }
 

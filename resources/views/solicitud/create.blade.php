@@ -48,7 +48,7 @@
 
         <div class="form-group">
           <label> Correo:</label>
-          <input id="email" type="text" class="form-control" name="email" value="" placeholder="Email" required>
+          <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email" required>
         </div>
 
         <input type ="hidden" name="user_id" value="{{ Auth::user()->id }}">

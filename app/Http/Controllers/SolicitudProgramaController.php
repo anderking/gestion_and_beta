@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Mail\EmailSolicitudPrograma;
+use Illuminate\Support\Facades\Mail;
 use Webpatser\Uuid\Uuid;
 use App\SolicitudPrograma;
 use App\Carrera;
@@ -112,9 +114,11 @@ class SolicitudProgramaController extends Controller
         
         $solicitud_programa->precio_fact = $precio_fact->precio;
         $solicitud_programa->status = "P";
-        $solicitud_programa->pago_img = "";
+        $solicitud_programa->pago_img = "";        
 
         $solicitud_programa->save();
+
+        Mail::to($solicitud_programa->email)->send(new EmailSolicitudPrograma($solicitud_programa));
 
         return redirect()->route('programa.create')->with('status','Se ha enviado la solicitud');
 
@@ -157,6 +161,12 @@ class SolicitudProgramaController extends Controller
         {
             $solicitud_programa->status = $request['status'];
             $solicitud_programa->update();
+            
+            if($solicitud_programa->status=="E" || $solicitud_programa->status=="A")
+            {
+                Mail::to($solicitud_programa->email)->send(new EmailSolicitudPrograma($solicitud_programa));
+            }
+
             return redirect()->route('programa.index')->with('status','Solicitud Actualizada');
         }
 
@@ -170,7 +180,7 @@ class SolicitudProgramaController extends Controller
             $solicitud_programa->pago_img = $name;
             $solicitud_programa->status = 'R';
             $solicitud_programa->update();
-            return redirect()->route('programa.index');
+            return redirect()->route('programa.index')->with('status','Solicitud Actualizada');
         }
     }
 

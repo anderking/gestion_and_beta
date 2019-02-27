@@ -23,6 +23,7 @@ class CreateSolicitudServicioTable extends Migration
             $table->integer('servicio_id')->unsigned();
             $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade')->onUpdate('cascade');
             $table->string('observaciones');
+            $table->string('email');
             $table->string('status');
             $table->timestamps();
         });

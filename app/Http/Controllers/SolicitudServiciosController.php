@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\EmailSolicitudServicio;
+use Illuminate\Support\Facades\Mail;
 use Webpatser\Uuid\Uuid;
 use App\Servicio;
 use App\Departamento;
@@ -97,6 +99,7 @@ class SolicitudServiciosController extends Controller
         $solicitud_servicio->departamento_id = $request['departamento_id'];
         $solicitud_servicio->servicio_id = $request['servicio_id'];
         $solicitud_servicio->observaciones = $request['observaciones'];
+        //$solicitud_servicio->email = $request['email'];
         $solicitud_servicio->status = "P";
 
         $solicitud_servicio->save();
@@ -114,7 +117,8 @@ class SolicitudServiciosController extends Controller
         }
         
 
-        //Mail::to($request->email)->send(new EmailSolicitud($request));
+        Mail::to($request->email)->send(new EmailSolicitudServicio($solicitud_servicio));
+
         return redirect()->route('solicitudservicio.create')->with('status','Se ha enviado la solicitud');
     }
 
@@ -163,6 +167,12 @@ class SolicitudServiciosController extends Controller
         {
             $solicitud_servicio->status = $request['status'];
             $solicitud_servicio->update();
+            
+            if($solicitud_servicio->status=="E" || $solicitud_servicio->status=="A")
+            {
+                Mail::to('laurarincon2525@gmail.com')->send(new EmailSolicitudServicio($solicitud_servicio));
+            }
+
             return redirect()->route('solicitudservicio.index')->with('status','Se ha actualizado el usuario');
         }
     }

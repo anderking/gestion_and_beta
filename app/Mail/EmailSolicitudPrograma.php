@@ -7,9 +7,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Http\Request;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Solicitud;
 
-class EmailSolicitud extends Mailable
+class EmailSolicitudPrograma extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,12 +18,11 @@ class EmailSolicitud extends Mailable
      * @return void
      */
 
-    public $last_solicitud;
+    public $solicitud_programa;
 
-    public function __construct($id)
+    public function __construct($solicitud_programa)
     {
-        $last_solicitud = Solicitud::findOrFail($id);
-        $this->last_solicitud = $last_solicitud;
+        $this->solicitud_programa = $solicitud_programa;
     }
 
     /**
@@ -35,7 +33,7 @@ class EmailSolicitud extends Mailable
     public function build()
     {
         return $this->from('anderson.inversiones.2017@gmail.com','UCLA')
-                    ->subject('Solicitud de documentos UCLA')
-                    ->markdown('solicitud.email.send');
+                    ->subject('Solicitud de programas UCLA')
+                    ->markdown('programa.email.send');
     }
 }
