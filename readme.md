@@ -1,5 +1,3 @@
-Reportes en PDF y EXCEL listos, Filtro de fechas y estatus listos, le agregue un panel al administrador para que pueda ver la lista de todos los usuarios registrados y editarlos.
-
 Los usuarios son estos
 
 admin@admin.com<br>
@@ -28,7 +26,7 @@ DB_PASSWORD=123456
 
 Luego descargan la carpeta vendor en este link y la pegan dentro del proyecto, esa carpeta es donde esta el core de laravel, sin eso no les funcionaran los comandos
 
-https://mega.nz/#!o0wgwCjJ!erexI5zBYs7rviGsCQ__PJw9Klwyu50qRVAFW0q9gPc
+https://mega.nz/#!F1w3CKDa!fK1ukIMJM1aYee_ag7j8xKhqXYwFZD_7pSlt5y9npkg
 
 Ahora si pueden ejecutar los comandos
 
