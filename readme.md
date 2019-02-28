@@ -34,6 +34,10 @@ php artisan migrate:fresh<br>
 php artisan voyager:install<br>
 php artisan serve<br>
 
-php artisan voyager:admin "admin@admin.com" --create YA NO ES NECESARIO
-
 Y deberia correr con eso, por si acaso no les agarra el clone, descarguen el zip.
+
+Si no quiere descargar el git o clonarlo pueden descargar la app completa en este link
+
+https://mega.nz/#!hwYDlQxK!eo_Slu3oDiG1x_srWc1eknNkWCjDwUTsmWKLQREOCjcs
+
+Si descargan esta no es necesario que descarguen el otro link de "vendor" solo ejecutan de una vez los comandos
