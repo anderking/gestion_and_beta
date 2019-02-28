@@ -10,6 +10,7 @@
 	</ol>
 	
 	@include('common.success')
+	@include('common.errors')
 	
 	<div class="page-header">
 		<h3 style="text-align: center">Actualizar Datos</h3>
@@ -19,6 +20,16 @@
 		<div class="panel-heading">Información Básica</div>
 		<div class="panel-body">
 			{!! Form::open(array('route' => ['user.update',$user],'method' => 'PUT','files' => true)) !!}
+
+				@if(Auth::user()->hasRole('admin'))
+
+				<div class="form-group">
+					<label>Cédula</label>
+					<input type="text"class="form-control" name="cedula" value="{{ $user->cedula }}"  id="txtNombre" placeholder="Introduzca su Cedula">
+				</div>
+
+				@endif
+
 				<div class="form-group">
 					<label>Nombre</label>
 					<input type="text"class="form-control" name="name" value="{{ $user->name }}"  id="txtNombre" placeholder="Introduzca su nombre">
@@ -52,7 +63,7 @@
 				</div>
 
 				<button type="submit" id="btnEnviar" class="btn btn-primary">Actualizar</button>
-				<a href="{{ route('user.show',$user->id) }}" class="btn btn-default">Regresar</a>
+				<!--<a href="{{ route('user.show',$user->id) }}" class="btn btn-default">Regresar</a>-->
 			{!! Form::close() !!}
 		</div>
 	</div>

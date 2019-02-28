@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\SolicitudServicio;
+use Illuminate\Support\Facades\Auth;
 
-class AdministradorController extends Controller
+class EncargadoServicioController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::All();
-        return view('administrador.index')->with(['users'=>$users]);
+        $user_id = Auth::user()->id;
+        $request->user()->authorizeRoles(['encargadoserv','admin']);
+        $solicitud_servicios = SolicitudServicio::whereIn('status',['E'])->get();
+        return view('encargadoserv.index', [ 'solicitud_servicios' => $solicitud_servicios]);
     }
 
     /**

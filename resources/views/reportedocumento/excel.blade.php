@@ -66,6 +66,8 @@
 					<th>Código</th>
 					<th>Nombre del Solicitante</th>
 					<th>Cedula del Solicitante</th>
+					<th>Teléfono del Solicitante</th>
+					<th>Correo Enviado</th>
 					<th>Carrera</th>
 					<th>Documentos Solicitados</th>
 					<th>Monto</th>
@@ -88,6 +90,8 @@
 					<td>{{ $solicitud->uuid }}</td>
 					<td>{{ $solicitud->user->name }}</td>
 					<td>{{ $solicitud->user->cedula }}</td>
+					<td>{{ $solicitud->user->phone }}</td>
+					<td>{{ $solicitud->email }}</td>
 					<td>{{ $solicitud->carrera->nombre }}</td>
 					<td>
 						@foreach($solicitud->solicitudes_documentos as $solicitud_documento)

@@ -47,7 +47,7 @@
 	<p><strong>Total:</strong> {{ $solicitud_programa->precio_fact }} Bs.S</p>
 	<p><strong>Status: </strong>Pendiente</p>
 	<p><strong>Fecha de la Solicitud:</strong> {{ $solicitud_programa->created_at->format('d-m-Y') }}</p>
-	<p><strong>Fecha Procesada:</strong> {{ $solicitud_programa->updated_at->format('d-m-Y') }}</p>
+	<p><strong>Fecha de Aprobación:</strong> {{ $solicitud_programa->updated_at->format('d-m-Y') }}</p>
 
 	@endif
 

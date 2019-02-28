@@ -41,7 +41,7 @@
 </div>
 @else
 	<div class="jumbotron">
-		<h1 class="text-center">No hay registros</h1>
+		<h1 class="text-center">No existen registros de precios en nuestra Base de Datos</h1>
 	</div>
 @endif
 

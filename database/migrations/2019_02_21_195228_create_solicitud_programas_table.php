@@ -23,7 +23,6 @@ class CreateSolicitudProgramasTable extends Migration
             $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('pensum_id')->references('id')->on('pensum')->onDelete('cascade')->onUpdate('cascade');
             $table->string('descripcion');
-            $table->string('nrotelefono');
             $table->string('email');
             $table->float('precio_fact',8,2)->nullable();
             $table->string('status');

@@ -21,8 +21,8 @@ class CreateSolicitudesTable extends Migration
             $table->integer('carrera_id')->unsigned();
             $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade')->onUpdate('cascade');
             $table->string('email');
-            $table->string('status');
             $table->string('pago_img');
+            $table->string('status');
             $table->timestamps();
         });
     }

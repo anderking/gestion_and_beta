@@ -1,4 +1,4 @@
-Reportes en excel listos, falta vista del encargadoserv donde culmina las solicitudes de servicios
+Reportes en PDF y EXCEL listos, Filtro de fechas y estatus listos, le agregue un panel al administrador para que pueda ver la lista de todos los usuarios registrados y editarlos.
 
 Los usuarios son estos
 
@@ -14,6 +14,8 @@ secretario@secretario.com<br>
 secretario<br>
 docente@docente.com<br>
 docente<br>
+encargadoserv@encargadoserv.com<br>
+encargadoserv<br>
 
 Recuerden que deben sustituir en el archivo .env los parametros de postgress que serían estos:
 

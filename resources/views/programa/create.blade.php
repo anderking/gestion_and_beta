@@ -53,11 +53,6 @@
         </div>
 
         <div class="form-group">
-          <label>Numero Telefonico</label>
-          <input type="text" class="form-control" id="nrotelefono" name="nrotelefono" required>
-        </div>
-
-        <div class="form-group">
           <label> Correo:</label>
           <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         </div>

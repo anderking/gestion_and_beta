@@ -61,7 +61,7 @@
 						<ul class="nav menu">
 
 							@if(Auth::user()->hasRole('admin'))
-
+							<li><a href="{{ route('administrador') }}"><em class="fa fa-users">&nbsp;</em> Lista de Usuarios</a></li>
 							<li><a href="{{ url('admin') }}"><em class="fa fa-home">&nbsp;</em> Panel de control</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
 							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
@@ -70,16 +70,16 @@
 
 							<li><a href="{{ route('directoradm') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
+							<li><a href="{{ route('precioDocumentos.index') }}"><em class="fa fa-dollar">&nbsp;</em> Precio por Documentos</a></li>
+							<li><a href="{{ route('precioProgramas.index') }}"><em class="fa fa-dollar">&nbsp;</em> Precio por Pensum</a></li>
 							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-file">&nbsp;</em> Ver Solicitud de Documentos</a></li>
 							<li><a href="{{ route('programa.index') }}"><em class="fa fa-file-text">&nbsp;</em> Ver Solicitud de Programas</a></li>
 							<li><a href="{{ route('solicitudservicio.index') }}"><em class="fa fa-info-circle">&nbsp;</em> Ver Solicitud de Servicios</a></li>
-							<li><a href="{{ route('precioDocumentos.index') }}"><em class="fa fa-dollar">&nbsp;</em> Precio por Documentos</a></li>
-							<li><a href="{{ route('precioProgramas.index') }}"><em class="fa fa-dollar">&nbsp;</em> Precio por Pensum</a></li>
+							<li><a href="{{ route('sugerencia.index') }}"><em class="fa fa-comments">&nbsp;</em> Ver Listado de Sugerencias</a></li>
 							<li><a href="{{ route('reportedocumentos.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Reporte de Documentos</a></li>
 							<li><a href="{{ route('reporteprogramas.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Reporte de Programas</a></li>
 							<li><a href="{{ route('reporteservicios.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> 
 							Reporte de Servicios</a></li>
-							<li><a href="{{ route('sugerencia.index') }}"><em class="fa fa-comments">&nbsp;</em> Lista de Sugerencias</a></li>
 
 							@elseif(Auth::user()->hasRole('directorpro'))
 
@@ -112,6 +112,13 @@
 							<li><a href="{{ route('secretario') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
 							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
 							<li><a href="{{ route('solicitud.index') }}"><em class="fa fa-file">&nbsp;</em> Ver Solicitud de Documentos</a></li>
+							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
+
+							@elseif(Auth::user()->hasRole('encargadoserv'))
+
+							<li><a href="{{ route('encargadoserv') }}"><em class="fa fa-home">&nbsp;</em> Home</a></li>
+							<li><a href="{{ route('user.show',Auth::user()->id) }}"><em class="fa fa-user">&nbsp;</em> Perfil</a></li>
+							<li><a href="{{ route('solicitudservicio.index') }}"><em class="fa fa-info-circle">&nbsp;</em> Ver Solicitud de Servicios</a></li>
 							<li><a href="{{ route('sugerencia.create') }}"><em class="fa fa-comments">&nbsp;</em> Sugerencias &amp;  Quejas</a></li>
 
 							@endif

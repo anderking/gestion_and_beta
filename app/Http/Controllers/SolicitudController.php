@@ -33,7 +33,16 @@ class SolicitudController extends Controller
             {
                 $desde = $request->desde;
                 $hasta = $request->hasta;
-                $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->whereIn('status',['R'])->get();
+                $cedula = $request->cedula;
+
+                if($cedula==null)
+                {
+                    $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->whereIn('status',['R'])->get();
+                }else
+                {
+                    $solicitudes = Solicitud::FiltrarFechaCedula($desde,$hasta,$cedula)->whereIn('solicitudes.status',['R'])->get();
+                }
+
             }else
             {
                 $solicitudes = Solicitud::orderBy('created_at','DESC')->whereIn('status',['R'])->get();
@@ -46,7 +55,16 @@ class SolicitudController extends Controller
             {
                 $desde = $request->desde;
                 $hasta = $request->hasta;
-                $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->whereIn('status',['E'])->get();
+                $cedula = $request->cedula;
+
+                if($cedula==null)
+                {
+                    $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->whereIn('status',['E'])->get();
+                }else
+                {
+                    $solicitudes = Solicitud::FiltrarFechaCedula($desde,$hasta,$cedula)->whereIn('solicitudes.status',['E'])->get();
+                }
+
             }else
             {
                 $solicitudes = Solicitud::orderBy('created_at','DESC')->whereIn('status',['E'])->get();
@@ -102,7 +120,7 @@ class SolicitudController extends Controller
         $solicitud->user_id = $request['user_id'];
         $solicitud->carrera_id = $request['carrera_id'];
         $solicitud->uuid= Uuid::generate()->string;
-        //$solicitud->email = $request['email'];
+        $solicitud->email = $request['email'];
         $solicitud->status = $request['status'];
         $solicitud->pago_img = "";
 
@@ -124,7 +142,6 @@ class SolicitudController extends Controller
         }
 
         Mail::to($request->email)->send(new EmailSolicitud($last_solicitud));
-        //return view('solicitud.email.email')->with(['last_solicitud'=>$last_solicitud]);
         return redirect()->route('solicitud.create')->with('status','Se ha enviado la solicitud');
 
     }
@@ -171,7 +188,7 @@ class SolicitudController extends Controller
             
             if($solicitud->status=="E" || $solicitud->status=="A")
             {
-                Mail::to('andersondejesus2011@gmail.com')->send(new EmailSolicitud($solicitud));
+                Mail::to($solicitud->email)->send(new EmailSolicitud($solicitud));
             }
 
             return redirect()->route('solicitud.index')->with('status','Solicitud Actualizada');

@@ -37,5 +37,9 @@ class UserRolesTableSeeder extends Seeder
             'user_id'       => 6,
             'role_id'       => 6
         ));
+      \DB::table('user_roles')->insert(array(
+            'user_id'       => 7,
+            'role_id'       => 7
+        ));
     }
 }

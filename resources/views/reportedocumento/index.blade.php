@@ -5,7 +5,7 @@
 	
 	<ol class="breadcrumb">
 		<li><a href="#"><em class="fa fa-home"></em></a></li>
-		<li class="active">Home</li>
+		<li class="active">Solicitu de Documentos <span class="badge">{{ count($solicitudes) }}</span></li>
 	</ol>
 	
 	@include('layouts.filtrarfechas')
@@ -16,21 +16,24 @@
 			<input type="hidden" id="desdepdf" name="desdepdf" value="{{ $request->desde }}">
 			<input type="hidden" id="hastapdf" name="hastapdf" value="{{ $request->hasta }}">
 			<input type="hidden" id="statuspdf" name="statuspdf" value="{{ $request->status }}">
+			<input type="hidden" id="cedulapdf" name="cedulapdf" value="{{ $request->cedula }}">
 			<input type="submit" value="Generar PDF" class="btn btn-danger">
 			{!! Form::close() !!}
+			<br class="visible-xs">
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 			{!! Form::open(array('route' => 'reportedocumentosexcel','method' => 'GET')) !!}
 			<input type="hidden" id="desdeexcel" name="desdeexcel" value="{{ $request->desde }}">
 			<input type="hidden" id="hastaexcel" name="hastaexcel" value="{{ $request->hasta }}">
 			<input type="hidden" id="statusexcel" name="statusexcel" value="{{ $request->status }}">
+			<input type="hidden" id="cedulaexcel" name="cedulaexcel" value="{{ $request->cedula }}">
 			<input type="submit" value="Generar EXCEL" class="btn btn-success">
 			{!! Form::close() !!}
 		</div>
 	</div>
 	<br>
 
-	@if(count($solicitud)>0)
+	@if(count($solicitudes)>0)
 	<div class="table-responsive">
 		<table class="table table-hover table-condensed">
 			<thead>
@@ -38,6 +41,8 @@
 					<th>Código</th>
 					<th>Nombre del Solicitante</th>
 					<th>Cedula del Solicitante</th>
+					<th>Teléfono del Solicitante</th>
+					<th>Correo Enviado</th>
 					<th>Carrera</th>
 					<th>Documentos Solicitados</th>
 					<th>Monto</th>
@@ -47,7 +52,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($solicitud as $solicitud)
+				@foreach($solicitudes as $solicitud)
 					@php
 					 	$total=0;
 					 @endphp
@@ -60,6 +65,8 @@
 					<td>{{ $solicitud->uuid }}</td>
 					<td>{{ $solicitud->user->name }}</td>
 					<td>{{ $solicitud->user->cedula }}</td>
+					<td>{{ $solicitud->user->phone }}</td>
+					<td>{{ $solicitud->email }}</td>
 					<td>{{ $solicitud->carrera->nombre }}</td>
 					<td>
 						@foreach($solicitud->solicitudes_documentos as $solicitud_documento)

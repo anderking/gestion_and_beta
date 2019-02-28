@@ -5,7 +5,7 @@
 	
 	<ol class="breadcrumb">
 		<li><a href="#"><em class="fa fa-home"></em></a></li>
-		<li class="active">Home</li>
+		<li class="active">Sugerencias <span class="badge">{{ count($sugerencias) }}</span></li>
 	</ol>
 	
 	@include('layouts.filtrarfechas')

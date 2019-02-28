@@ -22,12 +22,19 @@ class ReporteProgramasController extends Controller
             $desde = $request->desde;
             $hasta = $request->hasta;
             $status = $request->status;
-            if($status==null)
+            $cedula = $request->cedula;
+
+            if($status==null && $cedula==null)
             {
                 $solicitud_programas = SolicitudPrograma::FiltrarFecha($desde,$hasta)->get();
-            }else{
+            }elseif($cedula==null){
                 $solicitud_programas = SolicitudPrograma::FiltrarFechaStatus($desde,$hasta,$status)->get();
+            }elseif($status==null){
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaCedula($desde,$hasta,$cedula)->get();
+            }else{
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaStatusCedula($desde,$hasta,$status,$cedula)->get();
             }
+
             return view('reporteprograma.index')->with(['solicitud_programas'=>$solicitud_programas,'request'=>$request]);
         }else
         {
@@ -47,11 +54,17 @@ class ReporteProgramasController extends Controller
             $desdepdf = $request->desdepdf;
             $hastapdf = $request->hastapdf;
             $statuspdf = $request->statuspdf;
-            if($statuspdf==null)
+            $cedulapdf = $request->cedulapdf;
+
+            if($statuspdf==null && $cedulapdf==null)
             {
                 $solicitud_programas = SolicitudPrograma::FiltrarFecha($desdepdf,$hastapdf)->get();
-            }else{
+            }elseif($cedulapdf==null){
                 $solicitud_programas = SolicitudPrograma::FiltrarFechaStatus($desdepdf,$hastapdf,$statuspdf)->get();
+            }elseif($statuspdf==null){
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaCedula($desdepdf,$hastapdf,$cedulapdf)->get();
+            }else{
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaStatusCedula($desdepdf,$hastapdf,$statuspdf,$cedulapdf)->get();
             }
         }else
         {
@@ -74,18 +87,25 @@ class ReporteProgramasController extends Controller
             $desdeexcel = $request->desdeexcel;
             $hastaexcel = $request->hastaexcel;
             $statusexcel = $request->statusexcel;
-            if($statusexcel==null)
+            $cedulaexcel = $request->cedulaexcel;
+
+            if($statusexcel==null && $cedulaexcel==null)
             {
                 $solicitud_programas = SolicitudPrograma::FiltrarFecha($desdeexcel,$hastaexcel)->get();
-            }else{
+            }elseif($cedulaexcel==null){
                 $solicitud_programas = SolicitudPrograma::FiltrarFechaStatus($desdeexcel,$hastaexcel,$statusexcel)->get();
+            }elseif($statusexcel==null){
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaCedula($desdeexcel,$hastaexcel,$cedulaexcel)->get();
+            }else{
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaStatusCedula($desdeexcel,$hastaexcel,$statusexcel,$cedulaexcel)->get();
             }
+
         }else
         {
             $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->get();
         }
 
-        return Excel::download(new SolicitudProgramaExport($solicitud_programas), 'users.xlsx');
+        return Excel::download(new SolicitudProgramaExport($solicitud_programas), 'reporteprograma.xlsx');
     }
 
     /**

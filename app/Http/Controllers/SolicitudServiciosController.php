@@ -34,10 +34,39 @@ class SolicitudServiciosController extends Controller
             {
                 $desde = $request->desde;
                 $hasta = $request->hasta;
-                $solicitud_servicios = SolicitudServicio::FiltrarFecha($desde,$hasta)->whereIn('status',['P'])->get();
+                $cedula = $request->cedula;
+
+                if($cedula==null)
+                {
+                    $solicitud_servicios = SolicitudServicio::FiltrarFecha($desde,$hasta)->whereIn('status',['P'])->get();
+                }else
+                {
+                    $solicitud_servicios = SolicitudServicio::FiltrarFechaCedula($desde,$hasta,$cedula)->whereIn('solicitud_servicios.status',['P'])->get();
+                }
             }else
             {
                 $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->whereIn('status',['P'])->get();
+            }
+        }
+
+        if(Auth::user()->hasRole('encargadoserv'))
+        {
+            if(count($request->query)>0)
+            {
+                $desde = $request->desde;
+                $hasta = $request->hasta;
+                $cedula = $request->cedula;
+
+                if($cedula==null)
+                {
+                    $solicitud_servicios = SolicitudServicio::FiltrarFecha($desde,$hasta)->whereIn('status',['E'])->get();
+                }else
+                {
+                    $solicitud_servicios = SolicitudServicio::FiltrarFechaCedula($desde,$hasta,$cedula)->whereIn('solicitud_servicios.status',['E'])->get();
+                }
+            }else
+            {
+                $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->whereIn('status',['E'])->get();
             }
         }
 
@@ -99,7 +128,7 @@ class SolicitudServiciosController extends Controller
         $solicitud_servicio->departamento_id = $request['departamento_id'];
         $solicitud_servicio->servicio_id = $request['servicio_id'];
         $solicitud_servicio->observaciones = $request['observaciones'];
-        //$solicitud_servicio->email = $request['email'];
+        $solicitud_servicio->email = $request['email'];
         $solicitud_servicio->status = "P";
 
         $solicitud_servicio->save();
@@ -170,7 +199,7 @@ class SolicitudServiciosController extends Controller
             
             if($solicitud_servicio->status=="E" || $solicitud_servicio->status=="A")
             {
-                Mail::to('andersondejesus2011@gmail.com')->send(new EmailSolicitudServicio($solicitud_servicio));
+                Mail::to($solicitud_servicio->email)->send(new EmailSolicitudServicio($solicitud_servicio));
             }
 
             return redirect()->route('solicitudservicio.index')->with('status','Se ha actualizado el usuario');

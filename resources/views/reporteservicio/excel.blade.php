@@ -66,6 +66,8 @@
 					<th>Código</th>
 					<th>Nombre del Solicitante</th>
 					<th>Cedula del Solicitante</th>
+					<th>Teléfono del Solicitante</th>
+					<th>Correo Enviado</th>
 					<th>Departamento</th>
 					<th>Tipo Servicio</th>
 					<th>Servicio</th>
@@ -82,6 +84,8 @@
 					<td>{{ $solicitud_servicio->uuid }}</td>
 					<td>{{ $solicitud_servicio->user->name }}</td>
 					<td>{{ $solicitud_servicio->user->cedula }}</td>
+					<td>{{ $solicitud_servicio->user->phone }}</td>
+					<td>{{ $solicitud_servicio->email }}</td>
 					<td>{{ $solicitud_servicio->departamento->nombre }}</td>
 					<td>{{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</td>
 					<td>{{ $solicitud_servicio->servicio->nombre }}</td>
@@ -90,7 +94,7 @@
 						{{ $solicitud_servicio_item->item->nombre }};
 						@endforeach
 					</td>
-					<td>{{ $solicitud_servicio->user->observaciones }}</td>
+					<td>{{ $solicitud_servicio->observaciones }}</td>
 					<td>{{ $solicitud_servicio->created_at->format('Y-m-d') }}</td>
 					<td>{{ $solicitud_servicio->updated_at->format('Y-m-d') }}</td>
 					<td>

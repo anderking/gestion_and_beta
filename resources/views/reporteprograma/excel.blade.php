@@ -66,11 +66,11 @@
 					<th>Código</th>
 					<th>Nombre del Solicitante</th>
 					<th>Cedula del Solicitante</th>
+					<th>Teléfono del Solicitante</th>
+					<th>Correo Enviado</th>
 					<th>Carrera</th>
 					<th>Pensum</th>
 					<th>Descripción</th>
-					<th>Teléfono</th>
-					<th>Email</th>
 					<th>Fecha Solicitada</th>
 					<th>Ultima Actualización</th>
 					<th>Status</th>
@@ -82,11 +82,11 @@
 					<td>{{ $solicitud_programa->uuid }}</td>
 					<td>{{ $solicitud_programa->user->name }}</td>
 					<td>{{ $solicitud_programa->user->cedula }}</td>
+					<td>{{ $solicitud_programa->user->phone }}</td>
+					<td>{{ $solicitud_programa->email }}</td>
 					<td>{{ $solicitud_programa->carrera->nombre }}</td>
 					<td>{{ $solicitud_programa->pensum->nombre }}</td>
 					<td>{{ $solicitud_programa->descripcion}}</td>
-					<td>{{ $solicitud_programa->nrotelefono}}</td>
-					<td>{{ $solicitud_programa->email }}</td>
 					<td>{{ $solicitud_programa->created_at->format('Y-m-d') }}</td>
 					<td>{{ $solicitud_programa->updated_at->format('Y-m-d') }}</td>
 					<td>

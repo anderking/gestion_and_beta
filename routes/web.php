@@ -76,6 +76,13 @@ Route::group(['prefix' => 'secretario','middleware' => ['auth']], function () {
 	]);
 });
 
+Route::group(['prefix' => 'encargadoserv','middleware' => ['auth']], function () {
+	Route::get('/',[
+		'uses'=> 'EncargadoServicioController@index',
+		'as' => 'encargadoserv'
+	]);
+});
+
 Route::resource('user', 'UserController')->middleware('auth');
 Route::resource('solicitud','SolicitudController')->middleware('auth');
 Route::resource('programa','SolicitudProgramaController')->middleware('auth');

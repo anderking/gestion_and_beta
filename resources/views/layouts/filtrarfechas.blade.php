@@ -56,7 +56,7 @@
 
 {!! Form::open(array('route' => 'solicitud.index','method' => 'GET','class'=>'form-horizontal')) !!}
 
-@elseif(Auth::user()->hasRole('docente'))
+@elseif(Auth::user()->hasRole('docente') || Auth::user()->hasRole('encargadoserv'))
 
 {!! Form::open(array('route' => 'solicitudservicio.index','method' => 'GET','class'=>'form-horizontal')) !!}
 
@@ -90,9 +90,12 @@
 			{!! Form::date('hasta', date('Y-m-d'), ['id'=>'hasta','class'=>'form-control','required']) !!}
 		</div>
 
+	@if(Auth::user()->hasRole('directoradm') || Auth::user()->hasRole('directorpro') || Auth::user()->hasRole('secretario'))
+	
+
 		@if(Route::getCurrentRoute()->getName()=="reportedocumentos.index" || Route::getCurrentRoute()->getName()=="reporteprogramas.index" || Route::getCurrentRoute()->getName()=="reporteservicios.index")
 		<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
-			{!! Form::label('statys', 'Status:',['class'=>'control-label']) !!}
+			{!! Form::label('status', 'Status:',['class'=>'control-label']) !!}
 		</div>
 		<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
 			<select class="form-control" name="status">
@@ -104,7 +107,23 @@
 				<option value="A">Culminado</option>
 			</select>
 		</div>
+		<!--<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
+			{!! Form::label('cedula', 'Cédula:',['class'=>'control-label']) !!}
+		</div>
+		<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+			{!! Form::text('cedula', null, ['class'=>'form-control','placeholder'=>'Cedula']) !!}
+		</div>-->
 		@endif
+
+		@if(Route::getCurrentRoute()->getName()=="solicitud.index" || Route::getCurrentRoute()->getName()=="programa.index" || Route::getCurrentRoute()->getName()=="solicitudservicio.index" || Route::getCurrentRoute()->getName()=="sugerencia.index")
+		<!--<div class="col-xs-12 col-sm-4 col-md-2 col-lg-2">
+			{!! Form::label('cedula', 'Cédula:',['class'=>'control-label']) !!}
+		</div>
+		<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+		    {!! Form::text('cedula', null, ['class'=>'form-control','placeholder'=>'Cedula']) !!}
+		</div>-->
+		@endif
+	@endif
 
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<br class="visible-xs">

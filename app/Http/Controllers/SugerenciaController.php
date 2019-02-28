@@ -17,7 +17,14 @@ class SugerenciaController extends Controller
         {
             $desde = $request->desde;
             $hasta = $request->hasta;
-            $sugerencias = Sugerencia::FiltrarFecha($desde,$hasta)->get();
+            $cedula = $request->cedula;
+            if($cedula==null)
+            {
+                $sugerencias = Sugerencia::FiltrarFecha($desde,$hasta)->get();
+            }else
+            {
+                $sugerencias = Sugerencia::FiltrarFechaCedula($desde,$hasta,$cedula)->get();
+            }
         }else
         {
             $sugerencias = Sugerencia::orderBy('created_at','DESC')->get();

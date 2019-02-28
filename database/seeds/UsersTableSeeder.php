@@ -90,5 +90,18 @@ class UsersTableSeeder extends Seeder
                 'created_at'    => Carbon\Carbon::now(),
                 'updated_at'    => Carbon\Carbon::now()
       ));
+
+      \DB::table('users')->insert(array(
+                'role_id'       => 7,
+                'name'          => 'Encargado de Servicio',
+                'email'         => 'encargadoserv@encargadoserv.com',
+                'avatar'        => 'encargadoserv.jpg',
+                'password'      => bcrypt('encargadoserv'),
+                'cedula'        => '1234567',
+                'address'       => 'Direccion',
+                'phone'         => '1234567',
+                'created_at'    => Carbon\Carbon::now(),
+                'updated_at'    => Carbon\Carbon::now()
+      ));
     }
 }

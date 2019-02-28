@@ -68,5 +68,11 @@ class RolesTableSeeder extends Seeder
             'created_at'    => Carbon\Carbon::now(),
             'updated_at'    => Carbon\Carbon::now()
         ]);
+        DB::table('roles')->insert([
+            "name" => "encargadoserv",
+            "display_name" => "Encargado de Servicio",
+            'created_at'    => Carbon\Carbon::now(),
+            'updated_at'    => Carbon\Carbon::now()
+        ]);
     }
 }

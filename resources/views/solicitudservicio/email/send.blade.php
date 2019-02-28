@@ -55,7 +55,7 @@
 
 	@elseif($solicitud_servicio->status=="A")
 
-	<h1 class="text-center">Tu solicitud ha sido aprobada, puedes ir a retirar tus documentos</h1>
+	<h1 class="text-center">Tu Solicitud de Servicio ha sido solventada</h1>
 	
 	<p><strong>Código de la Solicitud:</strong> {{ $solicitud_servicio->uuid }}</p>
 	<p><strong>Nombre del Solicitante:</strong> {{ $solicitud_servicio->user->name }}</p>
@@ -72,7 +72,7 @@
 	</ul>
 	<p><strong>Status: </strong>Aprobada</p>
 	<p><strong>Fecha de la Solicitud:</strong> {{ $solicitud_servicio->created_at->format('d-m-Y') }}</p>
-	<p><strong>Fecha Procesada:</strong> {{ $solicitud_servicio->updated_at->format('d-m-Y') }}</p>
+	<p><strong>Fecha Solventada:</strong> {{ $solicitud_servicio->updated_at->format('d-m-Y') }}</p>
 
 	@endif
 

@@ -67,6 +67,10 @@ class LoginController extends Controller
         {
             return '/secretario';
         }
+        elseif (Auth::user()->hasRole('encargadoserv'))
+        {
+            return '/encargadoserv';
+        }
 
     }
 }

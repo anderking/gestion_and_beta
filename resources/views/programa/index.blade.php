@@ -5,7 +5,7 @@
 	
 	<ol class="breadcrumb">
 		<li><a href="#"><em class="fa fa-home"></em></a></li>
-		<li class="active">Solicitud-Programa</li>
+		<li class="active">Solicitu de Programas <span class="badge">{{ count($solicitud_programas) }}</span></li>
 	</ol>
 
 	<div class="row">
@@ -18,12 +18,13 @@
 
 	@include('layouts.filtrarfechas')
 
-	@if(count($solicitud_programa)>0)	
-		@foreach($solicitud_programa as $solicitud_programa)
+	@if(count($solicitud_programas)>0)	
+		@foreach($solicitud_programas as $solicitud_programa)
 		<ul class="list-group">
 			<li class="list-group-item"><b>Solicitud: </b> {{ $solicitud_programa->uuid }}</li>
 			<li class="list-group-item"><b>Nombre del Solicitante: </b> {{ $solicitud_programa->user->name }}</li>
 			<li class="list-group-item"><b>Cedula del Solicitante: </b> {{ $solicitud_programa->user->cedula }}</li>
+			<li class="list-group-item"><b>Teléfono del Solicitante: </b> {{ $solicitud_programa->user->phone }}</li>
 			<li class="list-group-item"><b>Carrera: </b> {{ $solicitud_programa->pensum->nombre }}</li>
 			<li class="list-group-item"><b>Pensum: </b> {{ $solicitud_programa->carrera->nombre }}</li>
 			<li class="list-group-item"><b>Fecha de la Solicitud: </b> {{ $solicitud_programa->created_at->format('d-m-Y') }}</li>

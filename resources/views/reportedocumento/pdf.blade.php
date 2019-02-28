@@ -59,13 +59,15 @@
 </head>
 <body>
 
-	@if(count($solicitud)>0)
+	@if(count($solicitudes)>0)
 		<table class="table table-sm">
 			<thead class="thead-dark">
 				<tr>
 					<th>Código</th>
 					<th>Nombre del Solicitante</th>
 					<th>Cedula del Solicitante</th>
+					<th>Teléfono del Solicitante</th>
+					<th>Correo Enviado</th>
 					<th>Carrera</th>
 					<th>Documentos Solicitados</th>
 					<th>Monto</th>
@@ -75,7 +77,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($solicitud as $solicitud)
+				@foreach($solicitudes as $solicitud)
 					@php
 					 	$total=0;
 					 @endphp
@@ -88,6 +90,8 @@
 					<td>{{ $solicitud->uuid }}</td>
 					<td>{{ $solicitud->user->name }}</td>
 					<td>{{ $solicitud->user->cedula }}</td>
+					<td>{{ $solicitud->user->phone }}</td>
+					<td>{{ $solicitud->email }}</td>
 					<td>{{ $solicitud->carrera->nombre }}</td>
 					<td>
 						@foreach($solicitud->solicitudes_documentos as $solicitud_documento)

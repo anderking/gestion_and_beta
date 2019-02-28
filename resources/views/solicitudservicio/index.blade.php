@@ -5,7 +5,7 @@
 	
 	<ol class="breadcrumb">
 		<li><a href="#"><em class="fa fa-home"></em></a></li>
-		<li class="active">Solicitud-Servicio</li>
+		<li class="active">Solicitu de Servicios <span class="badge">{{ count($solicitud_servicios) }}</span></li>
 	</ol>
 
 	<div class="row">
@@ -21,12 +21,12 @@
 	@if(count($solicitud_servicios)>0)	
 		@foreach($solicitud_servicios as $solicitud_servicio)
 		<ul class="list-group">
-			<li class="list-group-item"><b>Solicitud: </b> {{ $solicitud_servicio->id }}</li>
+			<li class="list-group-item"><b>Solicitud: </b> {{ $solicitud_servicio->uuid }}</li>
 			<li class="list-group-item"><b>Nombre del Solicitante: </b> {{ $solicitud_servicio->user->name }}</li>
 			<li class="list-group-item"><b>Cedula del Solicitante: </b> {{ $solicitud_servicio->user->cedula }}</li>
 			<li class="list-group-item"><b>Departamento: </b> {{ $solicitud_servicio->departamento->nombre }}</li>
-			<li class="list-group-item"><b>Servicio: </b> {{ $solicitud_servicio->servicio->nombre }}</li>
 			<li class="list-group-item"><b>Tipo de Servicio: </b> {{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</li>
+			<li class="list-group-item"><b>Servicio: </b> {{ $solicitud_servicio->servicio->nombre }}</li>
 			<li class="list-group-item"><b>Observaciones: </b> {{ $solicitud_servicio->observaciones }}</li>
 			<li class="list-group-item"><b>Documentos: </b><br>
 				@foreach($solicitud_servicio->solicitud_servicio_items as $solicitud_servicio_item)

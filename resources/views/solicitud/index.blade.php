@@ -5,7 +5,7 @@
 	
 	<ol class="breadcrumb">
 		<li><a href="#"><em class="fa fa-home"></em></a></li>
-		<li class="active">Solicitud-Documento</li>
+		<li class="active">Solicitu de Documentos <span class="badge">{{ count($solicitudes) }}</span></li>
 	</ol>
 
 	<div class="row">

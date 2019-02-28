@@ -17,7 +17,7 @@ class CreateSolicitudServicioItemTable extends Migration
             $table->increments('id');
             $table->integer('solicitud_servicio_id')->unsigned();
             $table->integer('item_id')->unsigned();
-            $table->foreign('solicitud_servicio_id')->references('id')->on('solicitud_servicio')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('solicitud_servicio_id')->references('id')->on('solicitud_servicios')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

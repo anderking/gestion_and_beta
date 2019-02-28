@@ -74,7 +74,7 @@
 					        		@endif
                              @else
                             	<li><a href="{{ route('login') }}" data-toggle="modal">Acceso</a></li>
-					        	<li><a href="{{ route('register') }}" data-toggle="modal">Registrarse</a></li>
+					        	<!--<li><a href="{{ route('register') }}" data-toggle="modal">Registrarse</a></li>-->
 					      		@endauth
 					      	@endif
 					    </ul>

@@ -16,9 +16,9 @@
 	</div>
 	@if($user)
 	<ul class="list-group">
+		<li class="list-group-item"><b>Cedula: </b>{{ $user->cedula }}</li>
 		<li class="list-group-item"><b>Name: </b>{{ $user->name }}</li>
 		<li class="list-group-item"><b>Email: </b>{{ $user->email }}</li>
-		<li class="list-group-item"><b>Cedula: </b>{{ $user->cedula }}</li>
 		<li class="list-group-item"><b>Address: </b>{{ $user->address }}</li>
 		<li class="list-group-item"><b>Phone: </b>{{ $user->phone }}</li>
 		<li class="list-group-item"><b>Rol: </b>{{ $rol->display_name }}</li>

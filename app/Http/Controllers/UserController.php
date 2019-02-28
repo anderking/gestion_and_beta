@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Http\Requests\UsersUpdateRequest;
 
 use Cache;
 use File;
@@ -75,7 +76,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersUpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
 

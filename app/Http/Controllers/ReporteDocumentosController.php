@@ -7,7 +7,7 @@ use App\Solicitud;
 use Barryvdh\DomPDF\Facade as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SolicitudExport;
-
+use DB;
 class ReporteDocumentosController extends Controller
 {
     /**
@@ -22,17 +22,30 @@ class ReporteDocumentosController extends Controller
             $desde = $request->desde;
             $hasta = $request->hasta;
             $status = $request->status;
-            if($status==null)
+            $cedula = $request->cedula;
+
+            if($status==null && $cedula==null)
             {
-                $solicitud = Solicitud::FiltrarFecha($desde,$hasta)->get();
+                $solicitudes = Solicitud::FiltrarFecha($desde,$hasta)->get();
+            }elseif($cedula==null){
+                $solicitudes = Solicitud::FiltrarFechaStatus($desde,$hasta,$status)->get();
+            }elseif($status==null){
+                $solicitudes = Solicitud::FiltrarFechaCedula($desde,$hasta,$cedula)->get();
             }else{
-                $solicitud = Solicitud::FiltrarFechaStatus($desde,$hasta,$status)->get();
+                $solicitudes = Solicitud::FiltrarFechaStatusCedula($desde,$hasta,$status,$cedula)->get();
             }
-            return view('reportedocumento.index')->with(['solicitud'=>$solicitud,'request'=>$request]);
+
+                $solicitudes->each(function($solicitudes){
+                    $solicitudes->user;
+                    $solicitudes->carrera;
+                    $solicitudes->solicitudes_documentos;
+                });
+
+            return view('reportedocumento.index')->with(['solicitudes'=>$solicitudes,'request'=>$request]);
         }else
         {
-            $solicitud = Solicitud::orderBy('created_at','DESC')->get();
-            return view('reportedocumento.index')->with(['solicitud'=>$solicitud,'request'=>$request]);
+            $solicitudes = Solicitud::orderBy('created_at','DESC')->get();
+            return view('reportedocumento.index')->with(['solicitudes'=>$solicitudes,'request'=>$request]);
         }
 
     }
@@ -47,21 +60,26 @@ class ReporteDocumentosController extends Controller
             $desdepdf = $request->desdepdf;
             $hastapdf = $request->hastapdf;
             $statuspdf = $request->statuspdf;
-            if($statuspdf==null)
+            $cedulapdf = $request->cedulapdf;
+
+            if($statuspdf==null && $cedulapdf==null)
             {
-                $solicitud = Solicitud::FiltrarFecha($desdepdf,$hastapdf)->get();
+                $solicitudes = Solicitud::FiltrarFecha($desdepdf,$hastapdf)->get();
+            }elseif($cedulapdf==null){
+                $solicitudes = Solicitud::FiltrarFechaStatus($desdepdf,$hastapdf,$statuspdf)->get();
+            }elseif($statuspdf==null){
+                $solicitudes = Solicitud::FiltrarFechaCedula($desdepdf,$hastapdf,$cedulapdf)->get();
             }else{
-                $solicitud = Solicitud::FiltrarFechaStatus($desdepdf,$hastapdf,$statuspdf)->get();
+                $solicitudes = Solicitud::FiltrarFechaStatusCedula($desdepdf,$hastapdf,$statuspdf,$cedulapdf)->get();
             }
         }else
         {
-            $solicitud = Solicitud::orderBy('created_at','DESC')->get();
+            $solicitudes = Solicitud::orderBy('created_at','DESC')->get();
         }
         
-        $pdf = PDF::loadView('reportedocumento.pdf', compact('solicitud'));
+        $pdf = PDF::loadView('reportedocumento.pdf', compact('solicitudes'));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('reportedocumento.pdf');
-        //return view('reportedocumento.pdf')->with(['solicitud'=>$solicitud]); 
     }
 
     public function excel(Request $request)
@@ -74,18 +92,24 @@ class ReporteDocumentosController extends Controller
             $desdeexcel = $request->desdeexcel;
             $hastaexcel = $request->hastaexcel;
             $statusexcel = $request->statusexcel;
-            if($statusexcel==null)
+            $cedulaexcel = $request->cedulaexcel;
+
+            if($statusexcel==null && $cedulaexcel==null)
             {
-                $solicitud = Solicitud::FiltrarFecha($desdeexcel,$hastaexcel)->get();
+                $solicitudes = Solicitud::FiltrarFecha($desdeexcel,$hastaexcel)->get();
+            }elseif($cedulaexcel==null){
+                $solicitudes = Solicitud::FiltrarFechaStatus($desdeexcel,$hastaexcel,$statusexcel)->get();
+            }elseif($statusexcel==null){
+                $solicitudes = Solicitud::FiltrarFechaCedula($desdeexcel,$hastaexcel,$cedulaexcel)->get();
             }else{
-                $solicitud = Solicitud::FiltrarFechaStatus($desdeexcel,$hastaexcel,$statusexcel)->get();
+                $solicitudes = Solicitud::FiltrarFechaStatusCedula($desdeexcel,$hastaexcel,$statusexcel,$cedulaexcel)->get();
             }
         }else
         {
-            $solicitud = Solicitud::orderBy('created_at','DESC')->get();
+            $solicitudes = Solicitud::orderBy('created_at','DESC')->get();
         }
 
-        return Excel::download(new SolicitudExport($solicitud), 'users.xlsx');
+        return Excel::download(new SolicitudExport($solicitudes), 'reportedocumento.xlsx');
     }
 
     /**

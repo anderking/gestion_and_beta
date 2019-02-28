@@ -32,10 +32,18 @@ class SolicitudProgramaController extends Controller
             {
                 $desde = $request->desde;
                 $hasta = $request->hasta;
-                $solicitud_programa = SolicitudPrograma::FiltrarFecha($desde,$hasta)->whereIn('status',['R'])->get();
+                $cedula = $request->cedula;
+
+                if($cedula==null)
+                {
+                    $solicitud_programas = SolicitudPrograma::FiltrarFecha($desde,$hasta)->whereIn('status',['R'])->get();
+                }else
+                {
+                    $solicitud_programas = SolicitudPrograma::FiltrarFechaCedula($desde,$hasta,$cedula)->whereIn('solicitud_programas.status',['R'])->get();
+                }
             }else
             {
-                $solicitud_programa = SolicitudPrograma::orderBy('created_at','DESC')->whereIn('status',['R'])->get();
+                $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->whereIn('status',['R'])->get();
             }
         }
 
@@ -45,10 +53,18 @@ class SolicitudProgramaController extends Controller
             {
                 $desde = $request->desde;
                 $hasta = $request->hasta;
-                $solicitud_programa = SolicitudPrograma::FiltrarFecha($desde,$hasta)->whereIn('status',['E'])->get();
+                $cedula = $request->cedula;
+
+                if($cedula==null)
+                {
+                    $solicitud_programas = SolicitudPrograma::FiltrarFecha($desde,$hasta)->whereIn('status',['E'])->get();
+                }else
+                {
+                    $solicitud_programas = SolicitudPrograma::FiltrarFechaCedula($desde,$hasta,$cedula)->whereIn('solicitud_programas.status',['E'])->get();
+                }
             }else
             {
-                $solicitud_programa = SolicitudPrograma::orderBy('created_at','DESC')->whereIn('status',['E'])->get();
+                $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->whereIn('status',['E'])->get();
             }
         }
 
@@ -58,20 +74,14 @@ class SolicitudProgramaController extends Controller
             {
                 $desde = $request->desde;
                 $hasta = $request->hasta;
-                $solicitud_programa = SolicitudPrograma::FiltrarFecha($desde,$hasta)->where('user_id',$user_id)->get();
+                $solicitud_programas = SolicitudPrograma::FiltrarFecha($desde,$hasta)->where('user_id',$user_id)->get();
             }else
             {
-                $solicitud_programa = SolicitudPrograma::orderBy('created_at','DESC')->where('user_id',$user_id)->get();
+                $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->where('user_id',$user_id)->get();
             }
         }
-
-        $solicitud_programa->each(function($solicitud_programa){
-            $solicitud_programa->user;
-            $solicitud_programa->carrera;
-            $solicitud_programa->pensum;
-        });
         
-        return view('programa.index')->with('solicitud_programa', $solicitud_programa);
+        return view('programa.index')->with('solicitud_programas', $solicitud_programas);
     }
 
     /**
@@ -107,7 +117,6 @@ class SolicitudProgramaController extends Controller
         $solicitud_programa->carrera_id = $request->input('carrera_id');
         $solicitud_programa->pensum_id = $request->input('pensum_id');
         $solicitud_programa->descripcion = $request->input('descripcion');
-        $solicitud_programa->nrotelefono = $request->input('nrotelefono');
         $solicitud_programa->email = $request->input('email');
 
         $precio_fact = DB::table('precio_programas')->select('precio')->where('carrera_id', $solicitud_programa->carrera_id)->where('pensum_id', $solicitud_programa->pensum_id)->first();

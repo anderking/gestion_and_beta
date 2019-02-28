@@ -85,7 +85,7 @@ class ReporteServiciosController extends Controller
             $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->get();
         }
 
-        return Excel::download(new SolicitudServicioExport($solicitud_servicios), 'users.xlsx');
+        return Excel::download(new SolicitudServicioExport($solicitud_servicios), 'reporteservicio.xlsx');
     }
 
     /**
