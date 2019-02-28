@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SolicitudPrograma;
 use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SolicitudProgramaExport;
 
 class ReporteProgramasController extends Controller
 {
@@ -60,7 +62,30 @@ class ReporteProgramasController extends Controller
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('reporteprograma.pdf');
         //return view('reporteprograma.pdf')->with(['solicitud'=>$solicitud]);
+    }
+
+    public function excel(Request $request)
+    {
+        $desdeexcel = $request->desdeexcel;
+        $hastaexcel = $request->hastaexcel;
         
+        if($desdeexcel!=null && $hastaexcel!=null)
+        {
+            $desdeexcel = $request->desdeexcel;
+            $hastaexcel = $request->hastaexcel;
+            $statusexcel = $request->statusexcel;
+            if($statusexcel==null)
+            {
+                $solicitud_programas = SolicitudPrograma::FiltrarFecha($desdeexcel,$hastaexcel)->get();
+            }else{
+                $solicitud_programas = SolicitudPrograma::FiltrarFechaStatus($desdeexcel,$hastaexcel,$statusexcel)->get();
+            }
+        }else
+        {
+            $solicitud_programas = SolicitudPrograma::orderBy('created_at','DESC')->get();
+        }
+
+        return Excel::download(new SolicitudProgramaExport($solicitud_programas), 'users.xlsx');
     }
 
     /**

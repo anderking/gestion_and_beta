@@ -11,12 +11,20 @@
 	@include('layouts.filtrarfechas')
 	
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 			{!! Form::open(array('route' => 'reporteserviciospdf','method' => 'GET')) !!}
 			<input type="hidden" id="desdepdf" name="desdepdf" value="{{ $request->desde }}">
 			<input type="hidden" id="hastapdf" name="hastapdf" value="{{ $request->hasta }}">
 			<input type="hidden" id="statuspdf" name="statuspdf" value="{{ $request->status }}">
 			<input type="submit" value="Generar PDF" class="btn btn-primary">
+			{!! Form::close() !!}
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			{!! Form::open(array('route' => 'reporteserviciosexcel','method' => 'GET')) !!}
+			<input type="hidden" id="desdeexcel" name="desdeexcel" value="{{ $request->desde }}">
+			<input type="hidden" id="hastaexcel" name="hastaexcel" value="{{ $request->hasta }}">
+			<input type="hidden" id="statusexcel" name="statusexcel" value="{{ $request->status }}">
+			<input type="submit" value="Generar EXCEL" class="btn btn-success">
 			{!! Form::close() !!}
 		</div>
 	</div>
@@ -31,8 +39,8 @@
 					<th>Nombre del Solicitante</th>
 					<th>Cedula del Solicitante</th>
 					<th>Departamento</th>
-					<th>Servicio</th>
 					<th>Tipo de Servicio</th>
+					<th>Servicio</th>
 					<th>Observaciones</th>
 					<th>Items Solicitados</th>
 					<th>Fecha Solicitada</th>
@@ -47,8 +55,8 @@
 					<td>{{ $solicitud_servicio->user->name }}</td>
 					<td>{{ $solicitud_servicio->user->cedula }}</td>
 					<td>{{ $solicitud_servicio->departamento->nombre }}</td>
-					<td>{{ $solicitud_servicio->servicio->nombre }}</td>
 					<td>{{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</td>
+					<td>{{ $solicitud_servicio->servicio->nombre }}</td>
 					<td>{{ $solicitud_servicio->observaciones }}</td>
 					<td>{{ count($solicitud_servicio->solicitud_servicio_items) }}</td>
 					<td>{{ $solicitud_servicio->created_at->format('Y-m-d') }}</td>

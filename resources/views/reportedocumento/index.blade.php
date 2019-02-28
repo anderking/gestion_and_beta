@@ -11,12 +11,20 @@
 	@include('layouts.filtrarfechas')
 
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 			{!! Form::open(array('route' => 'reportedocumentospdf','method' => 'GET')) !!}
 			<input type="hidden" id="desdepdf" name="desdepdf" value="{{ $request->desde }}">
 			<input type="hidden" id="hastapdf" name="hastapdf" value="{{ $request->hasta }}">
 			<input type="hidden" id="statuspdf" name="statuspdf" value="{{ $request->status }}">
-			<input type="submit" value="Generar PDF" class="btn btn-primary">
+			<input type="submit" value="Generar PDF" class="btn btn-danger">
+			{!! Form::close() !!}
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			{!! Form::open(array('route' => 'reportedocumentosexcel','method' => 'GET')) !!}
+			<input type="hidden" id="desdeexcel" name="desdeexcel" value="{{ $request->desde }}">
+			<input type="hidden" id="hastaexcel" name="hastaexcel" value="{{ $request->hasta }}">
+			<input type="hidden" id="statusexcel" name="statusexcel" value="{{ $request->status }}">
+			<input type="submit" value="Generar EXCEL" class="btn btn-success">
 			{!! Form::close() !!}
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-Falta la vista del encargado de servicio para que culmine las solicitudes y generar los reportes en pdf y excel
+Reportes en excel listos, falta vista del encargadoserv donde culmina las solicitudes de servicios
 
 Los usuarios son estos
 

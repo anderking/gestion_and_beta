@@ -170,7 +170,7 @@ class SolicitudServiciosController extends Controller
             
             if($solicitud_servicio->status=="E" || $solicitud_servicio->status=="A")
             {
-                Mail::to('laurarincon2525@gmail.com')->send(new EmailSolicitudServicio($solicitud_servicio));
+                Mail::to('andersondejesus2011@gmail.com')->send(new EmailSolicitudServicio($solicitud_servicio));
             }
 
             return redirect()->route('solicitudservicio.index')->with('status','Se ha actualizado el usuario');

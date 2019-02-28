@@ -19,12 +19,11 @@ class EmailSolicitud extends Mailable
      * @return void
      */
 
-    public $last_solicitud;
+    public $solicitud;
 
-    public function __construct($id)
+    public function __construct($last_solicitud)
     {
-        $last_solicitud = Solicitud::findOrFail($id);
-        $this->last_solicitud = $last_solicitud;
+        $this->solicitud = $last_solicitud;
     }
 
     /**

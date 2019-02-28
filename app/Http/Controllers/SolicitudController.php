@@ -123,7 +123,7 @@ class SolicitudController extends Controller
             $solicitud_documentos->save();
         }
 
-        Mail::to($request->email)->send(new EmailSolicitud($last_solicitud->id));
+        Mail::to($request->email)->send(new EmailSolicitud($last_solicitud));
         //return view('solicitud.email.email')->with(['last_solicitud'=>$last_solicitud]);
         return redirect()->route('solicitud.create')->with('status','Se ha enviado la solicitud');
 
@@ -171,7 +171,7 @@ class SolicitudController extends Controller
             
             if($solicitud->status=="E" || $solicitud->status=="A")
             {
-                Mail::to('laurarincon2525@gmail.com')->send(new EmailSolicitud($id));
+                Mail::to('andersondejesus2011@gmail.com')->send(new EmailSolicitud($solicitud));
             }
 
             return redirect()->route('solicitud.index')->with('status','Solicitud Actualizada');

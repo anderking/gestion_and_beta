@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SolicitudServicio;
 use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SolicitudServicioExport;
 
 class ReporteServiciosController extends Controller
 {
@@ -59,8 +61,31 @@ class ReporteServiciosController extends Controller
         $pdf = PDF::loadView('reporteservicio.pdf', compact('solicitud_servicios'));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('reporteservicio.pdf');
-        //return view('reporteservicio.pdf')->with(['solicitud'=>$solicitud]);
+        //return view('reporteservicio.pdf')->with(['solicitud'=>$solicitud]);        
+    }
+
+    public function excel(Request $request)
+    {
+        $desdeexcel = $request->desdeexcel;
+        $hastaexcel = $request->hastaexcel;
         
+        if($desdeexcel!=null && $hastaexcel!=null)
+        {
+            $desdeexcel = $request->desdeexcel;
+            $hastaexcel = $request->hastaexcel;
+            $statusexcel = $request->statusexcel;
+            if($statusexcel==null)
+            {
+                $solicitud_servicios = SolicitudServicio::FiltrarFecha($desdeexcel,$hastaexcel)->get();
+            }else{
+                $solicitud_servicios = SolicitudServicio::FiltrarFechaStatus($desdeexcel,$hastaexcel,$statusexcel)->get();
+            }
+        }else
+        {
+            $solicitud_servicios = SolicitudServicio::orderBy('created_at','DESC')->get();
+        }
+
+        return Excel::download(new SolicitudServicioExport($solicitud_servicios), 'users.xlsx');
     }
 
     /**

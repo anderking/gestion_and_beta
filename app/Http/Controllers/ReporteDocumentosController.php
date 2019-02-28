@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Solicitud;
 use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SolicitudExport;
 
 class ReporteDocumentosController extends Controller
 {
@@ -59,8 +61,31 @@ class ReporteDocumentosController extends Controller
         $pdf = PDF::loadView('reportedocumento.pdf', compact('solicitud'));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('reportedocumento.pdf');
-        //return view('reportedocumento.pdf')->with(['solicitud'=>$solicitud]);
+        //return view('reportedocumento.pdf')->with(['solicitud'=>$solicitud]); 
+    }
+
+    public function excel(Request $request)
+    {
+        $desdeexcel = $request->desdeexcel;
+        $hastaexcel = $request->hastaexcel;
         
+        if($desdeexcel!=null && $hastaexcel!=null)
+        {
+            $desdeexcel = $request->desdeexcel;
+            $hastaexcel = $request->hastaexcel;
+            $statusexcel = $request->statusexcel;
+            if($statusexcel==null)
+            {
+                $solicitud = Solicitud::FiltrarFecha($desdeexcel,$hastaexcel)->get();
+            }else{
+                $solicitud = Solicitud::FiltrarFechaStatus($desdeexcel,$hastaexcel,$statusexcel)->get();
+            }
+        }else
+        {
+            $solicitud = Solicitud::orderBy('created_at','DESC')->get();
+        }
+
+        return Excel::download(new SolicitudExport($solicitud), 'users.xlsx');
     }
 
     /**
