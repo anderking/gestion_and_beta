@@ -36,7 +36,7 @@
             @foreach($carrera->precio_documentos as $documento)
             <div class="check">
               
-              <input id="ch-{{$documento->carrera_id}}-{{$documento->documento_id}}" value="{{$documento->documento_id}}" name="documentos[]" type="checkbox" onchange="onChecked('ch-{{$documento->carrera_id}}-{{$documento->documento_id}}')">
+              <input id="{{$documento->carrera_id}}-{{$documento->documento_id}}" value="{{$documento->documento_id}}" name="documentos[]" class="check-item" type="checkbox" onchange="onChecked('{{$documento->carrera_id}}-{{$documento->documento_id}}')">
 
               <label>{{$documento->documento->nombre}}</label>
               <span class="badge">{{$documento->precio}} Bs.S</span>
@@ -76,6 +76,8 @@
     function selected()
     {
       var checkboxs = document.getElementsByClassName('checkbox-content');
+      var item = document.getElementsByClassName('check-item');
+
       idselected = document.getElementById('carera_id');
       id = idselected.options[idselected.selectedIndex].value;
       
@@ -84,10 +86,14 @@
         if(checkboxs[i].id==id)
         {
           checkboxs[i].style.display="block"
+          $(".check-item").prop('checked', false);
+
         }
         else
         {
           checkboxs[i].style.display="none"
+          $(".check-item").prop('checked', false);
+
         }
       }
     }
@@ -95,7 +101,6 @@
     function onChecked(id)
     {
         var checkbox = document.getElementById(id);
-        var precio = checkbox.value;
     }
     
 </script>

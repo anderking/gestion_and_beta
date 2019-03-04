@@ -25,11 +25,14 @@
 			<li class="list-group-item"><b>Nombre del Solicitante: </b> {{ $solicitud_servicio->user->name }}</li>
 			<li class="list-group-item"><b>Cedula del Solicitante: </b> {{ $solicitud_servicio->user->cedula }}</li>
 			<li class="list-group-item"><b>Departamento: </b> {{ $solicitud_servicio->departamento->nombre }}</li>
-			<li class="list-group-item"><b>Tipo de Servicio: </b> {{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</li>
+			{{-- <li class="list-group-item"><b>Tipo de Servicio: </b> {{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</li> --}}
 			<li class="list-group-item"><b>Servicio: </b> {{ $solicitud_servicio->servicio->nombre }}</li>
 			<li class="list-group-item"><b>Observaciones: </b> {{ $solicitud_servicio->observaciones }}</li>
-			<li class="list-group-item"><b>Documentos: </b><br>
+			<li class="list-group-item"><b>Items: </b><br>
 				@foreach($solicitud_servicio->solicitud_servicio_items as $solicitud_servicio_item)
+				@if($solicitud_servicio_item->cantidad)
+				<b>({{ $solicitud_servicio_item->cantidad }} unidades)</b>
+				@endif
 				{{ $solicitud_servicio_item->item->nombre }}<br>
 				@endforeach
 			</li>
@@ -52,7 +55,7 @@
 				@endif
 			</li>
 
-			@if(Auth::user()->hasRole('docente'))
+			@if(Auth::user()->hasRole('docente') || Auth::user()->hasRole('admin'))
 				@if($solicitud_servicio->status=='P' || $solicitud_servicio->status=='C')
 				<li class="list-group-item">
 					@if($solicitud_servicio->status=='P')

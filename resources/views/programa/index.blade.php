@@ -55,7 +55,7 @@
 			</li>
 			@endif
 
-			@if(Auth::user()->hasRole('estudiante'))
+			@if(Auth::user()->hasRole('estudiante') || Auth::user()->hasRole('admin'))
 				@if($solicitud_programa->status=='P' || $solicitud_programa->status=='C')
 				<li class="list-group-item">
 					@if($solicitud_programa->status=='P')

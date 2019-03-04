@@ -1072,3 +1072,7 @@ ol{
 .badge-danger{
   background-color: #d9534f !important;
 }
+
+.form-control-cantidad{
+  width: 12%
+}

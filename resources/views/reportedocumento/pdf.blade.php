@@ -94,9 +94,13 @@
 					<td>{{ $solicitud->email }}</td>
 					<td>{{ $solicitud->carrera->nombre }}</td>
 					<td>
-						@foreach($solicitud->solicitudes_documentos as $solicitud_documento)
-						{{ $solicitud_documento->documento->nombre }} ({{ $solicitud_documento->precio_fact }} Bs.S)<br>
-						@endforeach
+						<ul>
+							@foreach($solicitud->solicitudes_documentos as $solicitud_documento)
+							<li>
+								{{ $solicitud_documento->documento->nombre }} ({{ $solicitud_documento->precio_fact }} Bs.S)
+								</li>
+							@endforeach
+						</ul>
 					</td>
 					<td>{{ $total }} Bs.S</td>
 					<td>{{ $solicitud->created_at->format('Y-m-d') }}</td>

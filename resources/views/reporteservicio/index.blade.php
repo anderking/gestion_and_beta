@@ -44,7 +44,7 @@
 					<th>Teléfono del Solicitante</th>
 					<th>Correo Enviado</th>
 					<th>Departamento</th>
-					<th>Tipo de Servicio</th>
+					{{-- <th>Tipo de Servicio</th> --}}
 					<th>Servicio</th>
 					<th>Observaciones</th>
 					<th>Items Solicitados</th>
@@ -62,10 +62,21 @@
 					<td>{{ $solicitud_servicio->user->phone }}</td>
 					<td>{{ $solicitud_servicio->email }}</td>
 					<td>{{ $solicitud_servicio->departamento->nombre }}</td>
-					<td>{{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</td>
+					{{-- <td>{{ $solicitud_servicio->servicio->tipo_servicio->nombre }}</td> --}}
 					<td>{{ $solicitud_servicio->servicio->nombre }}</td>
 					<td>{{ $solicitud_servicio->observaciones }}</td>
-					<td>{{ count($solicitud_servicio->solicitud_servicio_items) }}</td>
+					<td>
+						<ul>
+							@foreach($solicitud_servicio->solicitud_servicio_items as $solicitud_servicio_item)
+							<li>
+								{{ $solicitud_servicio_item->item->nombre }}
+								@if($solicitud_servicio_item->cantidad)
+								({{ $solicitud_servicio_item->cantidad }} unidades)
+								@endif
+							</li>
+							@endforeach
+						</ul>
+					</td>
 					<td>{{ $solicitud_servicio->created_at->format('Y-m-d') }}</td>
 					<td>{{ $solicitud_servicio->updated_at->format('Y-m-d') }}</td>
 					<td>

@@ -14,19 +14,37 @@ class DepartamentosTableSeeder extends Seeder
     public function run()
     {
         DB::table('departamentos')->insert([
-            "nombre"        => "Departamento 1",
+            "nombre"        => "Departamento de Sistemas",
             "descripcion"   => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"    => Carbon\Carbon::now(),
             "updated_at"    => Carbon\Carbon::now()
         ]);
         DB::table('departamentos')->insert([
-            "nombre"        => "Departamento 2",
+            "nombre"        => "Departamento de  Matemáticas",
             "descripcion"   => "Cimi fugiat ipsam non amet est sequi pariatur veniam consequuntur eum voluptate aliquam expedita beatae rerum, voluptatem omnis.",
             "created_at"    => Carbon\Carbon::now(),
             "updated_at"    => Carbon\Carbon::now()
         ]);
         DB::table('departamentos')->insert([
-            "nombre"        => "Departamento 3",
+            "nombre"        => "Departamento de Investigación de Operaciones y Estadística",
+            "descripcion"   => "Cimi fugiat ipsam non amet est sequi pariatur veniam consequuntur eum voluptate aliquam expedita beatae rerum, voluptatem omnis.",
+            "created_at"    => Carbon\Carbon::now(),
+            "updated_at"    => Carbon\Carbon::now()
+        ]);
+        DB::table('departamentos')->insert([
+            "nombre"        => "Departamento de Estudios Básicos y Sociales",
+            "descripcion"   => "Cimi fugiat ipsam non amet est sequi pariatur veniam consequuntur eum voluptate aliquam expedita beatae rerum, voluptatem omnis.",
+            "created_at"    => Carbon\Carbon::now(),
+            "updated_at"    => Carbon\Carbon::now()
+        ]);
+        DB::table('departamentos')->insert([
+            "nombre"        => "Departamento de Manufactura y Producción",
+            "descripcion"   => "Cimi fugiat ipsam non amet est sequi pariatur veniam consequuntur eum voluptate aliquam expedita beatae rerum, voluptatem omnis.",
+            "created_at"    => Carbon\Carbon::now(),
+            "updated_at"    => Carbon\Carbon::now()
+        ]);
+        DB::table('departamentos')->insert([
+            "nombre"        => "Departamento de Física",
             "descripcion"   => "Cimi fugiat ipsam non amet est sequi pariatur veniam consequuntur eum voluptate aliquam expedita beatae rerum, voluptatem omnis.",
             "created_at"    => Carbon\Carbon::now(),
             "updated_at"    => Carbon\Carbon::now()

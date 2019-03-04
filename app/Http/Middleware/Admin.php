@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 
-class Directoradm
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -32,7 +32,7 @@ class Directoradm
     {
         if(Auth::user())
         {
-            if ($this->auth->user()->hasRole('directoradm') || $this->auth->user()->hasRole('admin'))
+            if ($this->auth->user()->hasRole('admin'))
             {
                 return $next($request);
             }

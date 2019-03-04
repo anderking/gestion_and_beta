@@ -14,37 +14,30 @@ class ServiciosTableSeeder extends Seeder
     public function run()
     {
         DB::table('servicios')->insert([
-            "nombre"            => "Servicio 1",
+            "nombre"            => "Electricidad",
             "tipo_servicio_id"  => 1,
-            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "descripcion"       => "Electricidad",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('servicios')->insert([
-            "nombre"            => "Servicio 2",
+            "nombre"            => "Refrigeracion",
             "tipo_servicio_id"  => 1,
-            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "descripcion"       => "Refrigeracion.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('servicios')->insert([
-            "nombre"            => "Servicio 3",
+            "nombre"            => "Infraestructura ",
             "tipo_servicio_id"  => 2,
-            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "descripcion"       => "Infraestructura",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('servicios')->insert([
-            "nombre"            => "Servicio 4",
+            "nombre"            => "Articulos de oficina",
             "tipo_servicio_id"  => 2,
-            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
-            "created_at"        => Carbon\Carbon::now(),
-            "updated_at"        => Carbon\Carbon::now()
-        ]);
-        DB::table('servicios')->insert([
-            "nombre"            => "Servicio 5",
-            "tipo_servicio_id"  => 2,
-            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "descripcion"       => "Articulos de oficina",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);

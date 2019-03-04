@@ -23,7 +23,7 @@
 
         <div class="form-group">
           <label>Seleccione el departamento:</label>
-          <select class="form-control" id="departamento_id" name="departamento_id" onChange="selected()" required>
+          <select class="form-control" id="departamento_id" name="departamento_id" required>
             <option value="" selected disabled > Seleccione un departamento </option>
             @foreach($departamentos as $departamento)
             <option value="{{$departamento->id}}"> {{$departamento->nombre}} </option>
@@ -47,9 +47,11 @@
             @foreach($servicio->items as $item)
             <div class="check">
               
-              <input id="ch-{{$item->id}}-{{$item->servicio_id}}" value="{{$item->id}}" name="items[]" type="checkbox" onchange="onChecked('ch-{{$item->id}}-{{$item->servicio_id}}')">
+              <input id="{{$item->id}}-{{$item->servicio_id}}" class="check-item" value="{{$item->id}}" name="items[]" type="checkbox" onchange="onChecked('{{$item->id}}-{{$item->servicio_id}}')">
 
+              <input id="cant-{{$item->id}}-{{$item->servicio_id}}" type="number" name="cantidad[]" class="form-control-cantidad input-cantidad" min="1" pattern="^[0-9]+" required>
               <label>{{$item->nombre}}</label>
+              
             </div>
             @endforeach
           </div>
@@ -84,31 +86,74 @@
     
     var idselected;
     var id = 0;
+
     
     function selected()
     {
       var checkboxs = document.getElementsByClassName('checkbox-content');
+      var cantidad = document.getElementsByClassName('input-cantidad');
+      var item = document.getElementsByClassName('check-item');
       idselected = document.getElementById('servicio_id');
       
       id = idselected.options[idselected.selectedIndex].value;
+      console.log(id);
       
       for (var i = 0; i < checkboxs.length; i++)
       {
         if(checkboxs[i].id==id)
         {
           checkboxs[i].style.display="block"
+          $(".check-item").prop('checked', false);
+          $(".input-cantidad").prop('disabled', true);
+          $('.input-cantidad').val('');
+            
+          if(id==4)
+          {
+            for (var j = 0; j < cantidad.length; j++)
+            {
+              cantidad[j].style.display="inline-block"
+            }
+          }else{
+            for (var j = 0; j < cantidad.length; j++)
+            {
+              cantidad[j].style.display="none"
+            }
+          }
+
         }
         else
         {
           checkboxs[i].style.display="none"
+          $(".check-item").prop('checked', false);
+          $(".input-cantidad").prop('disabled', true);
+          $('.input-cantidad').val('');
+          if(id==4)
+          {
+            for (var j = 0; j < cantidad.length; j++)
+            {
+              cantidad[j].style.display="none"
+            }
+          }
         }
       }
     }
 
     function onChecked(id)
     {
-        var checkbox = document.getElementById(id);
-        var precio = checkbox.value;
+      var checkbox = document.getElementById(id);
+      var cantidad = document.getElementById("cant-"+id);
+      ids = idselected.options[idselected.selectedIndex].value;
+
+      if( $('#'+id).prop('checked') )
+      {
+        if(ids==4){
+          $("#cant-"+id).prop('disabled', false);
+        }
+
+      }else{
+        $("#cant-"+id).prop('disabled', true);
+      }
     }
     
 </script>
+@endsection

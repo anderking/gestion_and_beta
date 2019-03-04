@@ -14,7 +14,7 @@ class CreatePrecioDocumentosTable extends Migration
     public function up()
     {
         Schema::create('precio_documentos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id'); 
             $table->integer('carrera_id')->unsigned();
             $table->integer('documento_id')->unsigned();
             $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade')->onUpdate('cascade');

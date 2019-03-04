@@ -9,6 +9,8 @@
 	</ol>
 
 	@include('common.success')
+	@include('common.errors')
+
 
 	<div class="row">
 		<div class="col-lg-12">

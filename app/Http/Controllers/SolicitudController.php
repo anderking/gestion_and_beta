@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Mail\EmailSolicitud;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
+use App\Http\Requests\SolicitudUpdateRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Carrera;
 use App\Pensum;
@@ -71,7 +72,7 @@ class SolicitudController extends Controller
             }
         }
 
-        if(Auth::user()->hasRole('estudiante'))
+        if(Auth::user()->hasRole('estudiante') || Auth::user()->hasRole('admin'))
         {
             if(count($request->query)>0)
             {
@@ -177,7 +178,7 @@ class SolicitudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SolicitudUpdateRequest $request, $id)
     {
         $solicitud = Solicitud::findOrFail($id);
         

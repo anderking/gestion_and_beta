@@ -14,88 +14,229 @@ class ItemsTableSeeder extends Seeder
     public function run()
     {
         DB::table('items')->insert([
-            "nombre"            => "Item 1",
+            "nombre"            => "Falla de iluminación",
             "servicio_id"  		=> 1,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 2",
+            "nombre"            => "Falla de Toma-Corriente",
+            "servicio_id"  		=> 1,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Corto Circuito",
+            "servicio_id"  		=> 1,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Falla de Tablero Eléctrico",
+            "servicio_id"  		=> 1,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Instalación de Brecker",
+            "servicio_id"  		=> 1,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Instalación de Cableado",
+            "servicio_id"  		=> 1,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Otros",
+            "servicio_id"  		=> 1,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Falla de A/A de Ventana",
             "servicio_id"  		=> 2,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 3",
+            "nombre"            => "Falla de A/A de Central",
             "servicio_id"  		=> 2,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 4",
-            "servicio_id"  		=> 3,
+            "nombre"            => "Mantenimiento de A/A",
+            "servicio_id"  		=> 2,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 5",
-            "servicio_id"  		=> 3,
+            "nombre"            => "Instalación de A/A",
+            "servicio_id"       => 2,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 6",
-            "servicio_id"  		=> 3,
+            "nombre"            => "Bote de Agua de A/A",
+            "servicio_id"       => 2,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 7",
-            "servicio_id"  		=> 4,
+            "nombre"            => "Reparación de Filtro de Agua",
+            "servicio_id"       => 2,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 8",
-            "servicio_id"  		=> 5,
+            "nombre"            => "Otros",
+            "servicio_id"       => 2,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 9",
-            "servicio_id"  		=> 5,
+            "nombre"            => "Reparación de Baño",
+            "servicio_id"       => 3,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 10",
-            "servicio_id"  		=> 5,
+            "nombre"            => "Reparación de Cerradura",
+            "servicio_id"       => 3,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 11",
-            "servicio_id"  		=> 5,
+            "nombre"            => "Pintura",
+            "servicio_id"       => 3,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
         DB::table('items')->insert([
-            "nombre"            => "Item 12",
-            "servicio_id"  		=> 5,
+            "nombre"            => "Albañilería",
+            "servicio_id"       => 3,
             "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
             "created_at"        => Carbon\Carbon::now(),
             "updated_at"        => Carbon\Carbon::now()
         ]);
+        DB::table('items')->insert([
+            "nombre"            => "Mudanza",
+            "servicio_id"       => 3,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Herrería",
+            "servicio_id"       => 3,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Otros",
+            "servicio_id"       => 3,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Marcadores",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Borradores",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Carpeta Tamaño Carta",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Carpeta Tamaño Oficio",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Sobres Tamaño Carta",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Sobres Tamaño Oficio",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Hojas Blanca Tamaño Carta",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Hojas Blanca Tamaño Oficio",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Bolígrafos",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Clips",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        DB::table('items')->insert([
+            "nombre"            => "Grapas",
+            "servicio_id"       => 4,
+            "descripcion"       => "Co nesciunt aliquid dolores dolore molestias, distinctio perspiciatis sequi inventore blanditiis iste possimus fugit sed odit quis doloribus? Eaque.",
+            "created_at"        => Carbon\Carbon::now(),
+            "updated_at"        => Carbon\Carbon::now()
+        ]);
+        
     }
 }

@@ -68,7 +68,7 @@ class SolicitudProgramaController extends Controller
             }
         }
 
-        if(Auth::user()->hasRole('estudiante'))
+        if(Auth::user()->hasRole('estudiante') || Auth::user()->hasRole('admin'))
         {
             if(count($request->query)>0)
             {

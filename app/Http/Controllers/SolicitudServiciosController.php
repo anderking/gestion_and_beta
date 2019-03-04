@@ -70,7 +70,7 @@ class SolicitudServiciosController extends Controller
             }
         }
 
-        if(Auth::user()->hasRole('docente'))
+        if(Auth::user()->hasRole('docente') || Auth::user()->hasRole('admin'))
         {
             if(count($request->query)>0)
             {
@@ -122,6 +122,7 @@ class SolicitudServiciosController extends Controller
      */
     public function store(Request $request)
     {
+        
         $solicitud_servicio = new SolicitudServicio();
         $solicitud_servicio->uuid= Uuid::generate()->string;
         $solicitud_servicio->user_id = $request['user_id'];
@@ -134,6 +135,7 @@ class SolicitudServiciosController extends Controller
         $solicitud_servicio->save();
 
         $items = $request->get('items', []);
+        $cantidad = $request->get('cantidad', []);
 
         $last_solicitud_servicio = SolicitudServicio::select('id')->orderby('created_at','DESC')->first();
 
@@ -142,6 +144,10 @@ class SolicitudServiciosController extends Controller
             $solicitud_item = new SolicitudServicioItem();
             $solicitud_item->solicitud_servicio_id = $last_solicitud_servicio->id;
             $solicitud_item->item_id = $items[$i];
+            if($solicitud_servicio->servicio_id==4)
+            {
+                $solicitud_item->cantidad = $cantidad[$i];
+            }
             $solicitud_item->save();
         }
         

@@ -15,6 +15,8 @@
 	</div>
 
 	@include('common.success')
+	@include('common.errors')
+
 
 	@include('layouts.filtrarfechas')
 
@@ -35,7 +37,7 @@
 	    			$total = $total+$solicitud_documento->precio_fact;
 				@endphp
 
-				<b class="sumar-{{ $solicitud_documento->id}}">{{ $solicitud_documento->precio_fact }}</b> Bs.S {{ $solicitud_documento->documento->nombre }}<br>
+				<b>{{ $solicitud_documento->precio_fact }}</b> Bs.S {{ $solicitud_documento->documento->nombre }}<br>
 				@endforeach
 			</li>
 			<li class="list-group-item"><b>Total: </b> {{ $total }} Bs.S</li>
@@ -67,7 +69,7 @@
 			</li>
 			@endif
 
-			@if(Auth::user()->hasRole('estudiante'))
+			@if(Auth::user()->hasRole('estudiante') || Auth::user()->hasRole('admin'))
 				@if($solicitud->status=='P' || $solicitud->status=='C')
 				<li class="list-group-item">
 					@if($solicitud->status=='P')
