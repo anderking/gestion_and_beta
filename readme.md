@@ -1,3 +1,5 @@
+Proyecto de pasantías para la administración de documentos y pensum de la UCLA, gestionando pagos de los estudiantes y generando reportes para los diferentes roles de usuarios.
+
 Los usuarios son estos
 
 admin@admin.com<br>
